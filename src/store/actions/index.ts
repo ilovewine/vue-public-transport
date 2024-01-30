@@ -1,5 +1,9 @@
 import initializeData from './initializeData';
 
+export const enum ACTION {
+  INITIALIZE_DATA = 'INITIALIZE_DATA',
+}
+
 export default {
-  initializeData,
+  [ACTION.INITIALIZE_DATA]: initializeData,
 };

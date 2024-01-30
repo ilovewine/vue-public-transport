@@ -1,4 +1,4 @@
-interface ServerResponse {
+export interface ServerResponse {
   line: number;
   stop: string;
   order: number;
