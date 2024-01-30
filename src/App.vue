@@ -1,24 +1,23 @@
 <template>
-  <div class="container-fluid m-3">
-    <header class="row">
+  <div class="container-fluid">
+    <header class="row mb-4">
       <div class="col-12">
-        <h1>Timetable</h1>
+        <h1 class="mb-5">Timetable</h1>
       </div>
-      <div class="col-12">
-        <nav class="navbar navbar-expand-md">
-          <router-link to="/lines">Bus Lines</router-link>
-          <router-link to="/stops">Bus Stops</router-link>
-        </nav>
+      <div class="col-12 bg-white">
+        <bus-navigation />
       </div>
     </header>
     <main class="row">
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </main>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import BusNavigation from '@/components/common/BusNavigation.vue';
+</script>
 
-<style lang="scss" scoped>
-@use 'scss';
-</style>
+<style lang="scss" scoped></style>

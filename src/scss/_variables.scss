@@ -1,0 +1,18 @@
+@import 'bootstrap/scss/functions';
+
+$body-bg: #f3f4f9;
+$body-color: #353536;
+$font-family-base: 'Inter', sans-serif;
+$font-size-base: 1rem;
+$h1-font-size: $font-size-base * 2;
+$h2-font-size: $font-size-base * 1.5;
+$nav-link-padding-y: 1.5rem;
+$nav-link-color: #9a9ca4;
+$nav-link-hover-color: #32363c;
+$nav-underline-gap: 0.5rem;
+$nav-underline-border-width: 0.15rem;
+$nav-underline-link-active-color: #3f00e4;
+$nav-link-font-weight: 400;
+
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
