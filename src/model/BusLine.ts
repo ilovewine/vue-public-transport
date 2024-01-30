@@ -1,12 +1,6 @@
-interface BusLineStop {
-  stop: string;
-  order: number;
-  time: string[];
-}
+import { BusLineStopModel } from './BusStop';
 
-interface BusLine {
+export interface BusLineModel {
   line: number;
-  stops: BusLineStop[];
+  stops: BusLineStopModel[];
 }
-
-export type BusLineModel = BusLine[];
