@@ -1,13 +1,13 @@
 @import 'common';
 @import 'animations';
 
-body {
-  display: flex;
-  flex-direction: column;
-  padding: $spacer;
-  min-height: 100vh;
+body,
+html {
+  height: 100vh;
+  overflow: hidden;
 }
 
-main {
-  flex: 1 0 auto;
+#app {
+  padding-left: $spacer;
+  padding-right: $spacer;
 }

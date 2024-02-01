@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid app-content d-flex flex-column">
     <header class="row mb-3">
       <div class="col-12">
         <h1 class="mb-5">Timetable</h1>
@@ -8,7 +8,7 @@
         <bus-navigation />
       </div>
     </header>
-    <main>
+    <main class="flex-grow-1">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -29,4 +29,9 @@ const store = useStore();
 store.dispatch(ACTION.INITIALIZE_DATA);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.app-content {
+  padding-top: 40px;
+  height: 100vh;
+}
+</style>

@@ -1,11 +1,11 @@
 <template>
-  <bus-data-list v-bind="data" />
+  <bus-data-list enable-sort label="Bus Stops" v-bind="data" />
 </template>
 
 <script lang="ts" setup>
 import BusDataList from '@/components/common/BusDataList.vue';
 import useStore from '@/store';
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 
 interface BusStopListProps {
   enableSearch?: boolean;
@@ -16,11 +16,12 @@ const props = defineProps<BusStopListProps>();
 const store = useStore();
 
 const data = reactive({
-  title: `Bus Line: ${store.state.selectedLine}`,
-  label: 'Bus Stops',
+  title: computed(() => `Bus Line: ${store.state.selectedLine?.line}`),
   enableSearch: props.enableSearch,
-  enableSort: true,
-  list: store.state.stops.slice(0, 3),
+  list: computed(() =>
+    store.state.selectedLine?.stops.map((stopData) => stopData.stop)
+  ),
+  isReady: computed(() => Boolean(store.state.selectedLine)),
 });
 </script>
 

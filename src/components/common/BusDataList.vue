@@ -1,21 +1,35 @@
 <template>
-  <div class="d-flex flex-column">
-    <template v-if="list">
-      <bus-search v-if="enableSearch" />
-      <h2 v-else>{{ title }}</h2>
-      <h3>{{ label }} <span v-if="enableSort">&#f0dc;</span></h3>
-      <ul class="list-group list-group-flush">
-        <li v-for="item in list" class="list-group-item">{{ item }}</li>
+  <div
+    class="bg-white rounded d-flex flex-column h-100"
+    :class="{ 'border-dashed': !isReady }"
+    ref="component"
+  >
+    <template v-if="isReady">
+      <div ref="dataHeaders" class="px-3 headers">
+        <bus-search v-if="enableSearch" />
+        <h2 v-else class="my-4">{{ title }}</h2>
+        <div class="d-flex gap-2 align-items-center mb-3">
+          <h3 class="m-0">{{ label }}</h3>
+          <sort-icon class="icon" v-if="enableSort" />
+        </div>
+      </div>
+      <ul class="list-group list-group-flush p-0 overflow-y-auto">
+        <li v-for="item in list" class="list-group-item bg-transparent py-3">
+          {{ item }}
+        </li>
       </ul>
     </template>
-    <h3 v-else>{{ emptyPlaceholder }}</h3>
+    <div class="position-relative flex-grow-1" v-else>
+      <span class="placeholder">{{ emptyPlaceholder }}</span>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import BusSearch from '@/components/BusSearch.vue';
+import SortIcon from '@/assets/SortIcon.vue';
 import useStore from '@/store';
-import { computed } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 
 interface BusDataBoxProps {
   title?: string;
@@ -23,16 +37,53 @@ interface BusDataBoxProps {
   enableSearch?: boolean;
   enableSort?: boolean;
   list?: unknown[];
+  isReady?: boolean;
 }
 
 defineProps<BusDataBoxProps>();
 
+const clearPx = (str: string) => +str.replace('px', '');
+const getHeight = (el: HTMLDivElement): number =>
+  clearPx(getComputedStyle(el).height);
+
 const store = useStore();
+const dataHeaders = ref<HTMLDivElement>();
+const component = ref<HTMLDivElement>();
+const listHeight = computed(
+  () =>
+    dataHeaders.value &&
+    component.value &&
+    `${getHeight(component.value) - getHeight(dataHeaders.value)}px`
+);
 
 const emptyPlaceholder = computed(
   () =>
     `Please select the bus ${store.state.selectedLine ? 'stop' : 'line'} first`
 );
+
+watch(dataHeaders, () => {
+  console.log(dataHeaders.value);
+});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.icon {
+  font-size: $h3-font-size * 0.8;
+  color: #9a9da4;
+}
+.headers {
+  border-bottom: 2px solid $border-color;
+}
+.border-dashed {
+  border: 2px dashed #9a9da4;
+}
+.placeholder {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.list-group {
+  height: v-bind(listHeight);
+}
+</style>

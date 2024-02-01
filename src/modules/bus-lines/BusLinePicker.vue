@@ -32,7 +32,9 @@ const isLineSelected = computed(
 );
 
 const setBusLine = (line: BusLineModel) => {
-  store.commit(MUTATION.SELECT_LINE, line);
+  if (store.getters[GETTER.IS_LINE_SELECTED](line))
+    store.commit(MUTATION.SELECT_LINE, null);
+  else store.commit(MUTATION.SELECT_LINE, line);
 };
 </script>
 

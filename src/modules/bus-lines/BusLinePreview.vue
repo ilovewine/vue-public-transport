@@ -1,11 +1,11 @@
 <template>
   <div class="row gap-3">
-    <div class="col bg-white rounded">
-      <bus-stop-list />
+    <div class="col px-0 position-relative">
+      <bus-stop-list class="position-absolute w-100" />
     </div>
 
-    <div class="col bg-white rounded">
-      <bus-time-list />
+    <div class="col px-0 position-relative">
+      <bus-time-list class="position-absolute w-100" />
     </div>
   </div>
 </template>
