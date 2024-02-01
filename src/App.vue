@@ -1,14 +1,14 @@
 <template>
   <div class="container-fluid">
-    <header class="row mb-4">
+    <header class="row mb-3">
       <div class="col-12">
         <h1 class="mb-5">Timetable</h1>
       </div>
-      <div class="col-12 bg-white">
+      <div class="col-12 bg-white rounded">
         <bus-navigation />
       </div>
     </header>
-    <main class="row">
+    <main>
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />

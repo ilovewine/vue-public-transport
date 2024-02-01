@@ -3,12 +3,13 @@ import { InjectionKey } from 'vue';
 import mutations from './mutations';
 import actions from './actions';
 import state, { StoreState } from './state';
+import getters from './getters';
 
 export const key: InjectionKey<Store<StoreState>> = Symbol();
 
 export const store = createStore<StoreState>({
   state,
-  getters: {},
+  getters,
   mutations,
   actions,
 });
