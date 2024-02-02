@@ -9,7 +9,7 @@
         <div ref="dataHeaders" class="px-3 headers">
           <bus-search v-if="enableSearch" />
           <h2 v-else class="my-4">{{ title }}</h2>
-          <div class="d-flex gap-2 align-items-center mb-3">
+          <div class="d-flex gap-1 align-items-center mb-3">
             <h3 class="m-0">{{ label }}</h3>
             <sort-icon class="icon" v-if="enableSort" />
           </div>
@@ -83,7 +83,7 @@ const emptyPlaceholder = computed(
 
 <style lang="scss" scoped>
 .icon {
-  font-size: $h3-font-size * 0.8;
+  font-size: $h3-font-size;
   color: #9a9da4;
 }
 .headers {

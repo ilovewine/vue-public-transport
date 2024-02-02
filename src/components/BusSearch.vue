@@ -1,5 +1,7 @@
 <template>
-  <div>BUS SEARCH</div>
+  <search>
+    <input type="text" placeholder="np. Agatowa" />
+  </search>
 </template>
 
 <script lang="ts" setup></script>
