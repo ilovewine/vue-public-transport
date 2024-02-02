@@ -19,8 +19,8 @@ import BusLinePreview from '@/modules/bus-lines/BusLinePreview.vue';
 .preview {
   position: absolute;
   left: 0;
-  bottom: 1rem;
+  bottom: 0;
   right: 0;
-  height: calc(100% - 1rem);
+  height: 100%;
 }
 </style>

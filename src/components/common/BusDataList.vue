@@ -21,14 +21,11 @@
           >
             <li
               v-for="item in list"
-              class="list-group-item bg-transparent py-3"
+              class="list-group-item py-3"
+              :class="{ interactive }"
+              @click="emit('select', item)"
             >
-              <component
-                :is="select ? 'a' : 'span'"
-                @click="select && select(item)"
-              >
-                {{ item }}
-              </component>
+              <slot :label="item" />
             </li>
           </ul>
         </transition>
@@ -53,11 +50,14 @@ interface BusDataBoxProps {
   enableSort?: boolean;
   list?: Data[];
   isReady?: boolean;
-  select?: (item: Data) => void;
-  // active?:
+  interactive?: boolean;
 }
 
 const props = defineProps<BusDataBoxProps>();
+
+const emit = defineEmits<{
+  select: [item: Data];
+}>();
 
 const clearPx = (str: string) => +str.replace('px', '');
 const getHeight = (el: HTMLDivElement): number =>
@@ -99,6 +99,16 @@ const emptyPlaceholder = computed(
   transform: translate(-50%, -50%);
 }
 .list-group {
-  height: v-bind(listHeight);
+  height: calc(v-bind(listHeight) - 1.5rem);
+}
+.list-group-item {
+  background-color: transparent;
+  &.interactive {
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background-color: #f8f8fb;
+      cursor: pointer;
+    }
+  }
 }
 </style>

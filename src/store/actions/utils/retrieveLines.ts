@@ -33,14 +33,16 @@ export default (response: ServerResponseModel): BusLineModel[] => {
           },
           {}
         )
-      ).map((stopData) => ({
-        ...stopData,
-        timetable: stopData.timetable.sort(compareTimes),
-      }));
+      )
+        .map((stopData) => ({
+          ...stopData,
+          timetable: stopData.timetable.sort(compareTimes),
+        }))
+        .sort((stopA, stopB) => stopA.order - stopB.order);
 
       return {
         line,
-        stops: groupedStops.sort((stopA, stopB) => stopA.order - stopB.order),
+        stops: groupedStops,
       };
     })
     .sort((lineA, lineB) => lineA.line - lineB.line);

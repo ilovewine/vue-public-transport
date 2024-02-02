@@ -1,9 +1,14 @@
 <template>
-  <bus-data-list label="Time" v-bind="data" />
+  <bus-data-list label="Time" v-bind="data">
+    <template #default="{ label }">
+      <bus-list-item :label="label" />
+    </template>
+  </bus-data-list>
 </template>
 
 <script lang="ts" setup>
 import BusDataList from '@/components/common/BusDataList.vue';
+import BusListItem from '@/components/common/BusListItem.vue';
 import { computed, reactive } from 'vue';
 import useStore from '@/store';
 
