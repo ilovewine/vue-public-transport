@@ -1,6 +1,6 @@
 import { ServerResponseModel } from '@/model/response';
 import axios from 'axios';
-import { Context } from '.';
+import { ACTION, Context } from '.';
 import { MUTATION } from '../mutations';
 import retrieveStops from './utils/retrieveStops';
 import retrieveLines from './utils/retrieveLines';
@@ -13,9 +13,8 @@ export default async (context: Context) => {
   const response: Awaited<ServerResponseModel> = (await axios.get(ENDPOINT_URL))
     .data;
 
-  const allStops = retrieveStops(response);
-
-  context.commit(MUTATION.SET_BUS_STOPS, allStops);
-  context.commit(MUTATION.SET_FILTERED_STOPS, allStops);
+  context.commit(MUTATION.SET_BUS_STOPS, retrieveStops(response));
   context.commit(MUTATION.SET_BUS_LINES, retrieveLines(response));
+
+  context.dispatch(ACTION.RESET_FILTERED_STOPS);
 };

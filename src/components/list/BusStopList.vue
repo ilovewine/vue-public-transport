@@ -16,6 +16,7 @@
 <script lang="ts" setup>
 import BusDataList from '@/components/list/BusDataList.vue';
 import BusListItem from '@/components/list/BusListItem.vue';
+import SortIcon from '@/assets/SortIcon.vue';
 import useStore from '@/store';
 import { MUTATION } from '@/store/mutations';
 import { computed, reactive } from 'vue';

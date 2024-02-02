@@ -19,7 +19,7 @@ import BusSearch from '../BusSearch.vue';
 import BusListItem from './BusListItem.vue';
 import SortIcon from '@/assets/SortIcon.vue';
 import useStore from '@/store';
-import { reactive, computed, watch, shallowRef } from 'vue';
+import { reactive, computed, watch, shallowRef, onUnmounted } from 'vue';
 import { ACTION } from '@/store/actions';
 import debounce from '@/utils/debounce';
 
@@ -34,6 +34,10 @@ watch(searchValue, () => {
 const data = reactive({
   list: computed(() => store.state.filteredStops),
   isReady: computed(() => Boolean(store.state.stops.length)),
+});
+
+onUnmounted(() => {
+  store.dispatch(ACTION.RESET_FILTERED_STOPS);
 });
 </script>
 
