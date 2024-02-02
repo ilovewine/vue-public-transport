@@ -3,6 +3,7 @@ import { BusLineStopModel } from '@/model/BusStop';
 
 export interface StoreState {
   stops: string[];
+  filteredStops: string[];
   lines: BusLineModel[];
   selectedLine: BusLineModel | null;
   selectedStop: BusLineStopModel | null;
@@ -10,6 +11,7 @@ export interface StoreState {
 
 const state: StoreState = {
   stops: [],
+  filteredStops: [],
   lines: [],
   selectedLine: null,
   selectedStop: null,

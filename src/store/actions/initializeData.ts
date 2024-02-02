@@ -13,6 +13,9 @@ export default async (context: Context) => {
   const response: Awaited<ServerResponseModel> = (await axios.get(ENDPOINT_URL))
     .data;
 
-  context.commit(MUTATION.SET_BUS_STOPS, retrieveStops(response));
+  const allStops = retrieveStops(response);
+
+  context.commit(MUTATION.SET_BUS_STOPS, allStops);
+  context.commit(MUTATION.SET_FILTERED_STOPS, allStops);
   context.commit(MUTATION.SET_BUS_LINES, retrieveLines(response));
 };

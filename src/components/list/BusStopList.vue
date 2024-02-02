@@ -1,11 +1,12 @@
 <template>
-  <bus-data-list
-    @select="selectStop"
-    enable-sort
-    label="Bus Stops"
-    v-bind="data"
-    interactive
-  >
+  <bus-data-list @select="selectStop" v-bind="data" interactive>
+    <template #header>
+      <h2 class="my-4">{{ data.title }}</h2>
+      <div class="d-flex gap-1 align-items-center mb-3">
+        <h3 class="m-0">Bus Stops</h3>
+        <sort-icon class="icon" />
+      </div>
+    </template>
     <template #default="{ label }">
       <bus-list-item :label="label" :active="active(label)" interactive />
     </template>
@@ -13,17 +14,11 @@
 </template>
 
 <script lang="ts" setup>
-import BusDataList from '@/components/common/BusDataList.vue';
-import BusListItem from '@/components/common/BusListItem.vue';
+import BusDataList from '@/components/list/BusDataList.vue';
+import BusListItem from '@/components/list/BusListItem.vue';
 import useStore from '@/store';
 import { MUTATION } from '@/store/mutations';
 import { computed, reactive } from 'vue';
-
-interface BusStopListProps {
-  enableSearch?: boolean;
-}
-
-const props = defineProps<BusStopListProps>();
 
 const store = useStore();
 
@@ -40,7 +35,6 @@ const active = computed(
 
 const data = reactive({
   title: computed(() => `Bus Line: ${store.state.selectedLine?.line}`),
-  enableSearch: props.enableSearch,
   list: computed(() =>
     store.state.selectedLine?.stops.map((stopData) => stopData.stop)
   ),

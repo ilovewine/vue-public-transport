@@ -6,13 +6,8 @@
   >
     <transition name="fade" mode="out-in">
       <div v-if="isReady">
-        <div ref="dataHeaders" class="px-3 headers">
-          <bus-search v-if="enableSearch" />
-          <h2 v-else class="my-4">{{ title }}</h2>
-          <div class="d-flex gap-1 align-items-center mb-3">
-            <h3 class="m-0">{{ label }}</h3>
-            <sort-icon class="icon" v-if="enableSort" />
-          </div>
+        <div ref="dataHeaders" class="px-3 header">
+          <slot name="header" />
         </div>
         <transition name="fade" mode="out-in">
           <ul
@@ -38,16 +33,11 @@
 </template>
 
 <script lang="ts" setup generic="Data">
-import BusSearch from '@/components/BusSearch.vue';
-import SortIcon from '@/assets/SortIcon.vue';
 import useStore from '@/store';
 import { computed, ref } from 'vue';
 
 interface BusDataBoxProps {
   title?: string;
-  label?: string;
-  enableSearch?: boolean;
-  enableSort?: boolean;
   list?: Data[];
   isReady?: boolean;
   interactive?: boolean;
@@ -82,11 +72,7 @@ const emptyPlaceholder = computed(
 </script>
 
 <style lang="scss" scoped>
-.icon {
-  font-size: $h3-font-size;
-  color: #9a9da4;
-}
-.headers {
+.header {
   border-bottom: 2px solid $border-color;
 }
 .border-dashed {

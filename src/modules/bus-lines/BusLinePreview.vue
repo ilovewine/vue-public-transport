@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts" setup>
-import BusStopList from '@/components/BusStopList.vue';
-import BusTimeList from '@/components/BusTimeList.vue';
+import BusStopList from '@/components/list/BusStopList.vue';
+import BusTimeList from '@/components/list/BusTimeList.vue';
 </script>
 
 <style lang="scss" scoped></style>
