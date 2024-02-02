@@ -19,9 +19,9 @@
 import BusLineButton from '@/components/BusLineButton.vue';
 import { BusLineModel } from '@/model/BusLine';
 import useStore from '@/store';
-import { MUTATION } from '@/store/mutations';
 import { computed } from 'vue';
 import { GETTER } from '@/store/getters';
+import { ACTION } from '@/store/actions';
 
 const store = useStore();
 
@@ -33,8 +33,8 @@ const isLineSelected = computed(
 
 const setBusLine = (line: BusLineModel) => {
   if (store.getters[GETTER.IS_LINE_SELECTED](line))
-    store.commit(MUTATION.SELECT_LINE, null);
-  else store.commit(MUTATION.SELECT_LINE, line);
+    store.dispatch(ACTION.SELECT_LINE, null);
+  else store.dispatch(ACTION.SELECT_LINE, line);
 };
 </script>
 

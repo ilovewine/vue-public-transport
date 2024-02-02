@@ -4,47 +4,65 @@
     :class="{ 'border-dashed': !isReady }"
     ref="component"
   >
-    <template v-if="isReady">
-      <div ref="dataHeaders" class="px-3 headers">
-        <bus-search v-if="enableSearch" />
-        <h2 v-else class="my-4">{{ title }}</h2>
-        <div class="d-flex gap-2 align-items-center mb-3">
-          <h3 class="m-0">{{ label }}</h3>
-          <sort-icon class="icon" v-if="enableSort" />
+    <transition name="fade" mode="out-in">
+      <div v-if="isReady">
+        <div ref="dataHeaders" class="px-3 headers">
+          <bus-search v-if="enableSearch" />
+          <h2 v-else class="my-4">{{ title }}</h2>
+          <div class="d-flex gap-2 align-items-center mb-3">
+            <h3 class="m-0">{{ label }}</h3>
+            <sort-icon class="icon" v-if="enableSort" />
+          </div>
         </div>
+        <transition name="fade" mode="out-in">
+          <ul
+            class="list-group list-group-flush p-0 overflow-y-auto"
+            :key="key"
+          >
+            <li
+              v-for="item in list"
+              class="list-group-item bg-transparent py-3"
+            >
+              <component
+                :is="select ? 'a' : 'span'"
+                @click="select && select(item)"
+              >
+                {{ item }}
+              </component>
+            </li>
+          </ul>
+        </transition>
       </div>
-      <ul class="list-group list-group-flush p-0 overflow-y-auto">
-        <li v-for="item in list" class="list-group-item bg-transparent py-3">
-          {{ item }}
-        </li>
-      </ul>
-    </template>
-    <div class="position-relative flex-grow-1" v-else>
-      <span class="placeholder">{{ emptyPlaceholder }}</span>
-    </div>
+      <div class="position-relative flex-grow-1" v-else>
+        <span class="placeholder">{{ emptyPlaceholder }}</span>
+      </div>
+    </transition>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup generic="Data">
 import BusSearch from '@/components/BusSearch.vue';
 import SortIcon from '@/assets/SortIcon.vue';
 import useStore from '@/store';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 
 interface BusDataBoxProps {
   title?: string;
   label?: string;
   enableSearch?: boolean;
   enableSort?: boolean;
-  list?: unknown[];
+  list?: Data[];
   isReady?: boolean;
+  select?: (item: Data) => void;
 }
 
-defineProps<BusDataBoxProps>();
+const props = defineProps<BusDataBoxProps>();
 
 const clearPx = (str: string) => +str.replace('px', '');
 const getHeight = (el: HTMLDivElement): number =>
   clearPx(getComputedStyle(el).height);
+
+const key = computed(() => JSON.stringify(props.list));
 
 const store = useStore();
 const dataHeaders = ref<HTMLDivElement>();
@@ -60,10 +78,6 @@ const emptyPlaceholder = computed(
   () =>
     `Please select the bus ${store.state.selectedLine ? 'stop' : 'line'} first`
 );
-
-watch(dataHeaders, () => {
-  console.log(dataHeaders.value);
-});
 </script>
 
 <style lang="scss" scoped>
