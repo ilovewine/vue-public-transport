@@ -54,6 +54,7 @@ interface BusDataBoxProps {
   list?: Data[];
   isReady?: boolean;
   select?: (item: Data) => void;
+  // active?:
 }
 
 const props = defineProps<BusDataBoxProps>();
