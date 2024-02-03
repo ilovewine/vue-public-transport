@@ -1,5 +1,5 @@
-import { BusLineModel } from '@/model/BusLine';
-import { BusLineStopModel } from '@/model/BusStop';
+import { BusLineModel } from '@/types/BusLine';
+import { BusLineStopModel } from '@/types/BusStop';
 
 export interface StoreState {
   stops: string[];

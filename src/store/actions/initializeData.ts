@@ -1,4 +1,4 @@
-import { ServerResponseModel } from '@/model/response';
+import { ServerResponseModel } from '@/types/response';
 import axios from 'axios';
 import { ACTION, Context } from '.';
 import { MUTATION } from '../mutations';

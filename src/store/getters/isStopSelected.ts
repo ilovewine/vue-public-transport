@@ -1,4 +1,4 @@
-import { BusLineStopModel } from '@/model/BusStop';
+import { BusLineStopModel } from '@/types/BusStop';
 import { StoreState } from '../state';
 
 export default (state: StoreState) =>

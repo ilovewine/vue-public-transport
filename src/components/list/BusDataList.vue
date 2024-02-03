@@ -1,9 +1,22 @@
 <template>
   <div
-    class="bg-white rounded d-flex flex-column h-100"
-    :class="{ 'border-dashed': !isReady }"
+    class="bg-white rounded d-flex flex-column h-100 data-list"
     ref="component"
   >
+    <svg
+      v-if="!isReady"
+      viewBox="0 0 300 100"
+      preserveAspectRatio="none"
+      class="svg"
+    >
+      <path
+        d="M0,0 300,0 300,100 0,100z"
+        fill="none"
+        stroke-dasharray="25, 20"
+        stroke-width="3"
+        vector-effect="non-scaling-stroke"
+      />
+    </svg>
     <transition name="fade" mode="out-in">
       <div v-if="isReady">
         <div ref="dataHeaders" class="px-3 header">
@@ -25,8 +38,8 @@
           </ul>
         </transition>
       </div>
-      <div class="position-relative flex-grow-1" v-else>
-        <span class="placeholder">{{ emptyPlaceholder }}</span>
+      <div class="placeholder flex-grow-1" v-else>
+        <span>{{ emptyPlaceholder }}</span>
       </div>
     </transition>
   </div>
@@ -72,6 +85,20 @@ const emptyPlaceholder = computed(
 </script>
 
 <style lang="scss" scoped>
+.data-list {
+  position: relative;
+}
+
+.svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  path {
+    stroke: #9a9da4;
+  }
+}
 .header {
   border-bottom: 2px solid $border-color;
 }

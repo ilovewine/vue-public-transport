@@ -2,7 +2,7 @@
   <bus-data-list @select="selectStop" v-bind="data" interactive>
     <template #header>
       <h2 class="my-4">{{ data.title }}</h2>
-      <div class="d-flex gap-1 align-items-center mb-3">
+      <div class="d-flex gap-1 align-items-center mb-3" @click="onClick">
         <h3 class="m-0">Bus Stops</h3>
         <sort-icon class="icon" />
       </div>
@@ -42,6 +42,12 @@ const data = reactive({
   select: selectStop,
   isReady: computed(() => Boolean(store.state.selectedLine)),
 });
+
+const onClick = () => console.log('test');
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.icon {
+  color: #9a9da4;
+}
+</style>

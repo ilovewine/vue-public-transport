@@ -1,4 +1,4 @@
-import { ServerResponseModel } from '@/model/response';
+import { ServerResponseModel } from '@/types/response';
 import removeDuplicates from '@/utils/removeDuplicates';
 
 export default (response: ServerResponseModel): string[] =>

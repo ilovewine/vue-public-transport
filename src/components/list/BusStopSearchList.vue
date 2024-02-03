@@ -43,7 +43,6 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .icon {
-  font-size: $h3-font-size;
   color: #9a9da4;
 }
 </style>

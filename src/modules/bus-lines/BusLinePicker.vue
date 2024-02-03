@@ -43,3 +43,4 @@ const setBusLine = (line: BusLineModel) => {
   gap: 0.5rem;
 }
 </style>
+@/types/BusLine
