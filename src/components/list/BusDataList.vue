@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white rounded d-flex flex-column h-100 data-list"
+    class="bg-white d-flex flex-column h-100 w-100 data-list position-absolute"
     ref="component"
   >
     <transition name="fade" mode="out-in">
@@ -40,6 +40,7 @@ import useStore from '@/store';
 import StrokedBorder from '@/assets/StrokedBorder.vue';
 import { computed, ref } from 'vue';
 import Sortable from '@/class/sort';
+import clearPx from '@/utils/clearPx';
 
 interface BusDataBoxProps {
   title?: string;
@@ -56,7 +57,6 @@ const emit = defineEmits<{
 
 const list = computed(() => props.sortable?.list);
 
-const clearPx = (str: string) => +str.replace('px', '');
 const getHeight = (el: HTMLDivElement): number =>
   clearPx(getComputedStyle(el).height);
 
