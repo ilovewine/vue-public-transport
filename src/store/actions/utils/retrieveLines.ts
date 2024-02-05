@@ -21,9 +21,9 @@ export default (response: ServerResponseModel): Sortable<BusLineModel> => {
           accumulator: Record<string, BusStopModel>,
           currentValue: ServerResponse
         ) => {
-          const timetable = new Sortable([currentValue.time], {
-            criteria: (time: string) => timeComparisonCriteria(time),
-          });
+          const timetable = new Sortable([currentValue.time], (time: string) =>
+            timeComparisonCriteria(time)
+          );
 
           if (!accumulator[currentValue.stop]) {
             accumulator[currentValue.stop] = {
@@ -43,9 +43,10 @@ export default (response: ServerResponseModel): Sortable<BusLineModel> => {
 
     groupedStops.forEach((stop) => stop.timetable.sort());
 
-    const sortableStops = new Sortable(groupedStops, {
-      criteria: (value: BusStopModel) => value.order,
-    });
+    const sortableStops = new Sortable(
+      groupedStops,
+      (value: BusStopModel) => value.order
+    );
 
     sortableStops.sort();
 
@@ -55,11 +56,7 @@ export default (response: ServerResponseModel): Sortable<BusLineModel> => {
     };
   });
 
-  const options = {
-    criteria: (value: BusLineModel) => value.line,
-  };
-
-  const result = new Sortable(linesList, options);
+  const result = new Sortable(linesList, (value: BusLineModel) => value.line);
 
   result.sort();
 

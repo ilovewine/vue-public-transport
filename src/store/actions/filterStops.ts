@@ -10,9 +10,10 @@ export default (context: Context, filteringCriteria: string) => {
     : context.state.stops.list;
   const filteredStops = new Sortable(
     filteredList,
-    context.state.filteredStops.options
+    context.state.filteredStops.criteria
   );
 
   filteredStops.sort();
+
   context.commit(MUTATION.SET_FILTERED_STOPS, filteredStops);
 };
