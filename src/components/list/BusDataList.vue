@@ -39,10 +39,11 @@
 import useStore from '@/store';
 import StrokedBorder from '@/assets/StrokedBorder.vue';
 import { computed, ref } from 'vue';
+import Sortable from '@/class/sort';
 
 interface BusDataBoxProps {
   title?: string;
-  list?: Data[];
+  sortable?: Sortable<Data>;
   isReady?: boolean;
   interactive?: boolean;
 }
@@ -53,11 +54,13 @@ const emit = defineEmits<{
   select: [item: Data];
 }>();
 
+const list = computed(() => props.sortable?.list);
+
 const clearPx = (str: string) => +str.replace('px', '');
 const getHeight = (el: HTMLDivElement): number =>
   clearPx(getComputedStyle(el).height);
 
-const key = computed(() => JSON.stringify(props.list));
+const key = computed(() => JSON.stringify(list.value));
 
 const store = useStore();
 const dataHeaders = ref<HTMLDivElement>();

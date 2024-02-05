@@ -32,8 +32,8 @@ watch(searchValue, () => {
 });
 
 const data = reactive({
-  list: computed(() => store.state.filteredStops),
-  isReady: computed(() => Boolean(store.state.stops.length)),
+  sortable: computed(() => store.state.filteredStops),
+  isReady: computed(() => Boolean(store.state.stops.list.length)),
 });
 
 onUnmounted(() => {

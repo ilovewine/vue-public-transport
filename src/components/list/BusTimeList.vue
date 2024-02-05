@@ -22,7 +22,7 @@ const store = useStore();
 
 const data = reactive({
   title: computed(() => `Bus Stop: ${store.state.selectedStop?.stop}`),
-  list: computed(() => store.state.selectedStop?.timetable),
+  sortable: computed(() => store.state.selectedStop?.timetable),
   isReady: computed(() => Boolean(store.state.selectedStop)),
 });
 </script>

@@ -7,8 +7,12 @@
         <sort-icon class="icon" />
       </div>
     </template>
-    <template #default="{ label }">
-      <bus-list-item :label="label" :active="active(label)" interactive />
+    <template #default="{ label: stopData }">
+      <bus-list-item
+        :label="stopData.stop"
+        :active="active(stopData.stop)"
+        interactive
+      />
     </template>
   </bus-data-list>
 </template>
@@ -20,14 +24,12 @@ import SortIcon from '@/assets/SortIcon.vue';
 import useStore from '@/store';
 import { MUTATION } from '@/store/mutations';
 import { computed, reactive } from 'vue';
+import { BusStopModel } from '@/types/BusStopModel';
 
 const store = useStore();
 
-const selectStop = (stop: string) => {
-  const stopData = store.state.selectedLine?.stops.find(
-    (stopData) => stopData.stop === stop
-  );
-  store.commit(MUTATION.SET_CURRENT_STOP, stopData);
+const selectStop = (stop: BusStopModel) => {
+  store.commit(MUTATION.SET_CURRENT_STOP, stop);
 };
 
 const active = computed(
@@ -36,9 +38,7 @@ const active = computed(
 
 const data = reactive({
   title: computed(() => `Bus Line: ${store.state.selectedLine?.line}`),
-  list: computed(() =>
-    store.state.selectedLine?.stops.map((stopData) => stopData.stop)
-  ),
+  sortable: computed(() => store.state.selectedLine?.stops),
   select: selectStop,
   isReady: computed(() => Boolean(store.state.selectedLine)),
 });
