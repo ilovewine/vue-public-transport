@@ -21,9 +21,9 @@ import useStore from '@/store';
 const store = useStore();
 
 const data = reactive({
-  title: computed(() => `Bus Stop: ${store.state.selectedStop?.stop}`),
-  sortable: computed(() => store.state.selectedStop?.timetable),
-  isReady: computed(() => Boolean(store.state.selectedStop)),
+  title: computed(() => `Bus Stop: ${store.state.selectedStop.stop}`),
+  sortable: computed(() => store.state.selectedStop.timetable),
+  isReady: computed(() => Boolean(store.state.selectedStop.stop)),
 });
 </script>
 

@@ -59,5 +59,9 @@ export default (response: ServerResponseModel): Sortable<BusLineModel> => {
     criteria: (value: BusLineModel) => value.line,
   };
 
-  return new Sortable(linesList, options);
+  const result = new Sortable(linesList, options);
+
+  result.sort();
+
+  return result;
 };

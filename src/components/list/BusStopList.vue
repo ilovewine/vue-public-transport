@@ -2,7 +2,7 @@
   <bus-data-list @select="selectStop" v-bind="data" interactive>
     <template #header>
       <h2 class="my-4">{{ data.title }}</h2>
-      <div class="d-flex gap-1 align-items-center mb-3" @click="onClick">
+      <div class="d-flex gap-1 align-items-center mb-3">
         <h3 class="m-0">Bus Stops</h3>
         <sort-icon class="icon" />
       </div>
@@ -29,6 +29,7 @@ import { BusStopModel } from '@/types/BusStopModel';
 const store = useStore();
 
 const selectStop = (stop: BusStopModel) => {
+  console.log(stop);
   store.commit(MUTATION.SET_CURRENT_STOP, stop);
 };
 
@@ -37,13 +38,11 @@ const active = computed(
 );
 
 const data = reactive({
-  title: computed(() => `Bus Line: ${store.state.selectedLine?.line}`),
-  sortable: computed(() => store.state.selectedLine?.stops),
+  title: computed(() => `Bus Line: ${store.state.selectedLine.line}`),
+  sortable: computed(() => store.state.selectedLine.stops),
   select: selectStop,
-  isReady: computed(() => Boolean(store.state.selectedLine)),
+  isReady: computed(() => Boolean(store.state.selectedLine.line)),
 });
-
-const onClick = () => console.log('test');
 </script>
 
 <style lang="scss" scoped>

@@ -22,6 +22,7 @@ import { computed } from 'vue';
 import { GETTER } from '@/store/getters';
 import { ACTION } from '@/store/actions';
 import { BusLineModel } from '@/types/BusLineModel';
+import { EMPTY_LINE } from '@/store/state';
 
 const store = useStore();
 
@@ -33,7 +34,7 @@ const isLineSelected = computed(
 
 const setBusLine = (line: BusLineModel) => {
   if (store.getters[GETTER.IS_LINE_SELECTED](line))
-    store.dispatch(ACTION.SELECT_LINE, null);
+    store.dispatch(ACTION.SELECT_LINE, EMPTY_LINE);
   else store.dispatch(ACTION.SELECT_LINE, line);
 };
 </script>
