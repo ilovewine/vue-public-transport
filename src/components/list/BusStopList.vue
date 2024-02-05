@@ -4,7 +4,7 @@
       <h2 class="my-4">{{ data.title }}</h2>
       <div class="d-flex gap-1 align-items-center mb-3">
         <h3 class="m-0">Bus Stops</h3>
-        <sort-icon class="icon" />
+        <sort-icon class="icon" @click="changeOrder" />
       </div>
     </template>
     <template #default="{ label: stopData }">
@@ -42,10 +42,13 @@ const data = reactive({
   select: selectStop,
   isReady: computed(() => Boolean(store.state.selectedLine.line)),
 });
+
+const changeOrder = () => store.state.selectedLine.stops.changeOrder();
 </script>
 
 <style lang="scss" scoped>
 .icon {
   color: #9a9da4;
+  cursor: pointer;
 }
 </style>

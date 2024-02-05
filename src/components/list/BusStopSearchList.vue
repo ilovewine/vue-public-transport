@@ -3,7 +3,7 @@
     <template #header>
       <div class="d-flex gap-1 align-items-center my-3">
         <h3 class="m-0">Bus Stops</h3>
-        <sort-icon class="icon" />
+        <sort-icon class="icon" @click="changeOrder" />
       </div>
     </template>
     <template #default="{ label }">
@@ -25,10 +25,13 @@ const data = reactive({
   sortable: computed(() => store.state.filteredStops),
   isReady: computed(() => Boolean(store.state.stops.list.length)),
 });
+
+const changeOrder = () => store.state.filteredStops.changeOrder();
 </script>
 
 <style lang="scss" scoped>
 .icon {
   color: #9a9da4;
+  cursor: pointer;
 }
 </style>
