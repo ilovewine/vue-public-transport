@@ -1,16 +1,19 @@
-export const sortWithMethod = <T>(
-  list: T[],
-  method: (valueA: T, valueB: T) => number
-) => list.sort(method);
+import { SORT_METHOD, Sortable } from '@/types/sort';
 
-export const sortBy = <T>(list: T[], byCriteria: (value: T) => number) =>
-  sortWithMethod(
-    list,
-    (itemA: T, itemB: T) => byCriteria(itemA) - byCriteria(itemB)
-  );
+export const sort = <T>(sortable: Sortable<T>): Sortable<T> => {
+  const { sorting } = sortable;
+  const { method, criteria } = sorting;
+  let result = { ...sortable };
+  if (criteria) {
+    result.list = sortable.list.sort(
+      (itemA: T, itemB: T) => criteria(itemA) - criteria(itemB)
+    );
+  } else result.list = sortable.list.sort();
+  if (method === SORT_METHOD.DESCENDING) result.list = result.list.reverse();
+  return result;
+};
 
-export const reverseSortBy = <T>(list: T[], byCriteria: (value: T) => number) =>
-  sortWithMethod(
-    list,
-    (itemA: T, itemB: T) => byCriteria(itemB) - byCriteria(itemA)
-  );
+export const changeSortOrder = <T>(sortable: Sortable<T>): Sortable<T> => ({
+  ...sortable,
+  list: sortable.list.reverse(),
+});

@@ -20,7 +20,7 @@
   height: 100%;
   rect {
     stroke: #9a9da4;
-    $radius: $border-radius / 3;
+    $radius: calc($border-radius / 3);
     rx: $radius;
     ry: $radius;
   }

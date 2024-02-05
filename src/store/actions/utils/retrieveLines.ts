@@ -1,48 +1,73 @@
-import { BusLineModel } from '@/types/BusLine';
-import { BusLineStopModel } from '@/types/BusStop';
+import { BusLineModel } from '@/types/BusLineModel';
+import { BusStopModel } from '@/types/BusStopModel';
 import { ServerResponse, ServerResponseModel } from '@/types/response';
-import compareTimes from '@/utils/compareTimes';
+import timeComparisonCriteria from '@/utils/time';
 import removeDuplicates from '@/utils/removeDuplicates';
-import { sortBy, sortWithMethod } from '@/utils/sort';
+import { sort } from '@/utils/sort';
+import { SORT_METHOD, Sortable } from '@/types/sort';
 
-export default (response: ServerResponseModel): BusLineModel[] => {
+export default (response: ServerResponseModel): Sortable<BusLineModel> => {
   const lines: number[] = removeDuplicates(
     response.map((stopData) => stopData.line)
   );
 
-  const unsortedLines = lines.map((line) => {
-    const ungroupedStops = response.filter(
-      (stopData) => stopData.line === line
-    );
+  const unsortedLines = {
+    sorting: {
+      method: SORT_METHOD.ASCENDING,
+      criteria: (value: BusLineModel) => value.line,
+    },
+    list: lines.map((line) => {
+      const ungroupedStops = response.filter(
+        (stopData) => stopData.line === line
+      );
 
-    const groupedStops = Object.values(
-      ungroupedStops.reduce(
-        (
-          accumulator: Record<string, BusLineStopModel>,
-          currentValue: ServerResponse
-        ) => {
-          if (!accumulator[currentValue.stop]) {
-            accumulator[currentValue.stop] = {
-              stop: currentValue.stop,
-              order: currentValue.order,
-              timetable: [currentValue.time],
-            };
-          } else
-            accumulator[currentValue.stop].timetable.push(currentValue.time);
-          return accumulator;
+      const groupedStops = Object.values(
+        ungroupedStops.reduce(
+          (
+            accumulator: Record<string, BusStopModel>,
+            currentValue: ServerResponse
+          ) => {
+            if (!accumulator[currentValue.stop]) {
+              const timetable = {
+                list: [currentValue.time],
+                sorting: {
+                  method: SORT_METHOD.ASCENDING,
+                  criteria: (time: string) => timeComparisonCriteria(time),
+                },
+              } satisfies Sortable<string>;
+
+              accumulator[currentValue.stop] = {
+                stop: currentValue.stop,
+                order: currentValue.order,
+                timetable,
+              };
+            } else
+              accumulator[currentValue.stop].timetable.list.push(
+                currentValue.time
+              );
+            return accumulator;
+          },
+          {}
+        )
+      ).map((stopData) => ({
+        ...stopData,
+        timetable: sort<string>(stopData.timetable),
+      }));
+
+      const sortableStops = sort<BusStopModel>({
+        list: groupedStops,
+        sorting: {
+          method: SORT_METHOD.ASCENDING,
+          criteria: (value: BusStopModel) => value.order,
         },
-        {}
-      )
-    ).map((stopData) => ({
-      ...stopData,
-      timetable: sortWithMethod(stopData.timetable, compareTimes),
-    }));
+      });
 
-    return {
-      line,
-      stops: sortBy(groupedStops, (property) => property.order),
-    };
-  });
+      return {
+        line,
+        stops: sortableStops,
+      };
+    }),
+  };
 
-  return sortBy(unsortedLines, (property) => property.line);
+  return sort<BusLineModel>(unsortedLines);
 };

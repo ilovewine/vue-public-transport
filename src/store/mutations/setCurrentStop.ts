@@ -1,5 +1,5 @@
-import { BusLineStopModel } from '@/types/BusStop';
+import { BusStopModel } from '@/types/BusStopModel';
 import { StoreState } from '../state';
 
-export default (state: StoreState, stop: BusLineStopModel) =>
+export default (state: StoreState, stop: BusStopModel) =>
   (state.selectedStop = stop);

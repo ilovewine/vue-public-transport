@@ -1,18 +1,21 @@
-import { BusLineModel } from '@/types/BusLine';
-import { BusLineStopModel } from '@/types/BusStop';
+import { BusLineModel } from '@/types/BusLineModel';
+import { BusStopModel } from '@/types/BusStopModel';
+import { Sortable } from '@/types/sort';
 
-export interface StoreState {
-  stops: string[];
-  filteredStops: string[];
-  lines: BusLineModel[];
-  selectedLine: BusLineModel | null;
-  selectedStop: BusLineStopModel | null;
+interface NonNullableStoreState {
+  stops: Sortable<string>;
+  filteredStops: Sortable<string>;
+  lines: Sortable<BusLineModel>;
+  selectedLine: BusLineModel;
+  selectedStop: BusStopModel;
 }
 
+export interface StoreState extends NullableProperties<NonNullableStoreState> {}
+
 const state: StoreState = {
-  stops: [],
-  filteredStops: [],
-  lines: [],
+  stops: null,
+  filteredStops: null,
+  lines: null,
   selectedLine: null,
   selectedStop: null,
 };

@@ -1,4 +1,4 @@
-import { BusLineModel } from '@/types/BusLine';
+import { BusLineModel } from '@/types/BusLineModel';
 import { Context } from '.';
 import { MUTATION } from '../mutations';
 

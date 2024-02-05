@@ -3,7 +3,10 @@ export const enum SORT_METHOD {
   DESCENDING = 'descending',
 }
 
-export interface Sort<T> {
-  method: SORT_METHOD;
-  byCriteria: (value: T) => number;
+export interface Sortable<T> {
+  sorting: {
+    method: SORT_METHOD;
+    criteria?: (value: T) => number;
+  };
+  list: T[];
 }
