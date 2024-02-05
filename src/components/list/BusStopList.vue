@@ -29,7 +29,6 @@ import { BusStopModel } from '@/types/BusStopModel';
 const store = useStore();
 
 const selectStop = (stop: BusStopModel) => {
-  console.log(stop);
   store.commit(MUTATION.SET_CURRENT_STOP, stop);
 };
 
