@@ -3,4 +3,4 @@ import { StoreState } from '../state';
 
 export default (state: StoreState) =>
   (stopData: BusStopModel): boolean =>
-    state.selectedStop?.stop === stopData.stop;
+    state.selectedStop.stop === stopData.stop;

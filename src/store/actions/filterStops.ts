@@ -5,7 +5,7 @@ export default (context: Context, filteringCriteria: string) =>
   context.commit(
     MUTATION.SET_FILTERED_STOPS,
     filteringCriteria.length
-      ? context.state.stops.filter((stop) =>
+      ? context.state.stops.list.filter((stop: string) =>
           stop
             .toLocaleLowerCase()
             .includes(filteringCriteria.toLocaleLowerCase())

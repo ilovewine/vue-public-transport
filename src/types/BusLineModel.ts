@@ -1,5 +1,5 @@
+import Sortable from '@/class/sort';
 import { BusStopModel } from './BusStopModel';
-import { Sortable } from './sort';
 
 export interface BusLineModel {
   line: number;

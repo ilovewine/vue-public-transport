@@ -1,4 +1,4 @@
-import { Sortable } from './sort';
+import Sortable from '@/class/sort';
 
 export interface BusStopModel {
   stop: string;
