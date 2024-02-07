@@ -1,6 +1,6 @@
 import { BusLineModel } from '@/types/BusLineModel';
 import { describe, it, expect, beforeEach, assertType } from 'vitest';
-import Sortable from '@/class/sort';
+import Sortable from '@/class/Sortable';
 import storeState, { StoreState } from '@/store/state';
 import { BusStopModel } from '@/types/BusStopModel';
 import mutations, { MUTATION } from '..';

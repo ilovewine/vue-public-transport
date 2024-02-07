@@ -1,4 +1,4 @@
-import Sortable from '@/class/sort';
+import Sortable from '@/class/Sortable';
 import { Context } from '.';
 import { MUTATION } from '../mutations';
 

@@ -1,7 +1,7 @@
 import { ServerResponseModel } from '@/types/response';
 import { assertType, describe, expect, it } from 'vitest';
 import retrieveStops from '../retrieveStops';
-import Sortable from '@/class/sort';
+import Sortable from '@/class/Sortable';
 import mockServerResponse from './mock/serverResponse';
 
 describe('retrieveStops', () => {

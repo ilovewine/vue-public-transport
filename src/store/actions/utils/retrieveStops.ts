@@ -1,4 +1,4 @@
-import Sortable from '@/class/sort';
+import Sortable from '@/class/Sortable';
 import { ServerResponseModel } from '@/types/response';
 import removeDuplicates from '@/utils/removeDuplicates';
 

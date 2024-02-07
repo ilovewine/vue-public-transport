@@ -39,7 +39,7 @@
 import useStore from '@/store';
 import StrokedBorder from '@/assets/StrokedBorder.vue';
 import { computed, ref } from 'vue';
-import Sortable from '@/class/sort';
+import Sortable from '@/class/Sortable';
 import clearPx from '@/utils/clearPx';
 
 interface BusDataBoxProps {
@@ -109,3 +109,4 @@ const emptyPlaceholder = computed(
   }
 }
 </style>
+@/class/Sortable

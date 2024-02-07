@@ -1,7 +1,7 @@
 import { describe, it, expect, assertType } from 'vitest';
 import retrieveLines from '../retrieveLines';
 import mockServerResponse from './mock/serverResponse';
-import Sortable from '@/class/sort';
+import Sortable from '@/class/Sortable';
 import { BusLineModel } from '@/types/BusLineModel';
 import { BusStopModel } from '@/types/BusStopModel';
 

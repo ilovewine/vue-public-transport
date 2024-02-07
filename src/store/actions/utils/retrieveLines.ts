@@ -3,7 +3,7 @@ import { BusStopModel } from '@/types/BusStopModel';
 import { ServerResponse, ServerResponseModel } from '@/types/response';
 import timeComparisonCriteria from '@/utils/time';
 import removeDuplicates from '@/utils/removeDuplicates';
-import Sortable from '@/class/sort';
+import Sortable from '@/class/Sortable';
 
 export default (response: ServerResponseModel): Sortable<BusLineModel> => {
   const lines: number[] = removeDuplicates(
