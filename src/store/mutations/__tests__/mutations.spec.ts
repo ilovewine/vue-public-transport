@@ -1,9 +1,9 @@
 import { BusLineModel } from '@/types/BusLineModel';
-import mutations, { MUTATION } from '.';
 import { describe, it, expect, beforeEach, assertType } from 'vitest';
 import Sortable from '@/class/sort';
-import storeState, { StoreState } from '../state';
+import storeState, { StoreState } from '@/store/state';
 import { BusStopModel } from '@/types/BusStopModel';
+import mutations, { MUTATION } from '..';
 
 const lines: BusLineModel[] = [...Array(3).keys()].map((index) => ({
   line: index,
@@ -19,7 +19,7 @@ const sortableStops = new Sortable(stops);
 const stop: BusStopModel = {
   stop: 'Stop 0',
   order: 0,
-  timetable: new Sortable(),
+  timetable: new Sortable(['10:00', '11:00', '12:00']),
 };
 
 describe('mutations', () => {
