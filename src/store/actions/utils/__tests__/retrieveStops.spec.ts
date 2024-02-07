@@ -4,7 +4,7 @@ import retrieveStops from '../retrieveStops';
 import Sortable from '@/class/Sortable';
 import mockServerResponse from './mock/serverResponse';
 
-describe('retrieveStops', () => {
+describe.concurrent('retrieveStops', () => {
   it('should return an empty Sortable when response is empty', () => {
     const response: ServerResponseModel = [];
     const result = retrieveStops(response);
