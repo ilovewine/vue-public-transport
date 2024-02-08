@@ -8,5 +8,6 @@ export default (context: Context) => {
     context.state.stops.criteria
   );
   stops.sort();
+
   context.commit(MUTATION.SET_FILTERED_STOPS, stops);
 };
