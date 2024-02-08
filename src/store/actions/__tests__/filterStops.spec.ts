@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import actions, { ACTION } from '..';
+import actions, { ACTION, Context } from '..';
 import Sortable from '@/class/Sortable';
 import { MUTATION } from '@/store/mutations';
-import testAction from './testAction';
+import withContext, { MockActionContext } from './withContext';
 
 describe('filterStops', () => {
   const filterStops = actions[ACTION.FILTER_STOPS];
@@ -16,7 +16,7 @@ describe('filterStops', () => {
   ]);
   const filteringCriteria = 'filter';
 
-  testAction((context) => {
+  withContext((context) => {
     it('should call commit with SET_FILTERED_STOPS mutation and provide sorted entries', () => {
       context.state.stops = stops;
 
@@ -26,9 +26,9 @@ describe('filterStops', () => {
         'filter stop 3',
       ]);
 
-      filterStops(context, filteringCriteria);
+      filterStops(context as unknown as Context, filteringCriteria);
 
-      expect(context.commit).toHaveBeenCalledTimes(1);
+      expect(context.commit).toHaveBeenCalledOnce();
       expect(context.commit).toHaveBeenCalledWith(
         MUTATION.SET_FILTERED_STOPS,
         filteredStops
