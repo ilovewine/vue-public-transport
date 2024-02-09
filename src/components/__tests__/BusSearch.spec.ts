@@ -2,12 +2,22 @@ import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusSearch from '../BusSearch.vue';
 
-describe.todo('BusSearch', () => {
-  it('should provide a list of router-links', () => {
-    const wrapper = mount(BusSearch);
+describe('BusSearch', () => {
+  it('should correctly pass input to v-model', async () => {
+    const wrapper = mount(BusSearch, {
+      props: {
+        modelValue: '',
+        'onUpdate:modelValue': (e: string) =>
+          wrapper.setProps({ modelValue: e }),
+      },
+    });
+    const inputWrapper = await wrapper.get('.input');
+    const inputElement = inputWrapper.element as HTMLInputElement;
+    expect(inputElement.value).toBe('');
 
-    console.log(wrapper);
+    await inputWrapper.setValue('test');
 
-    expect(1).toBe(1);
+    expect(inputElement.value).toBe('test');
+    expect(wrapper.props('modelValue')).toBe('test');
   });
 });
