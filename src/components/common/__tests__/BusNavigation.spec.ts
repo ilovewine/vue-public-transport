@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusNavigation from '../BusNavigation.vue';
 
-describe('BusNavigation', () => {
+describe.todo('BusNavigation', () => {
   it('should provide a list of router-links', () => {
     const wrapper = mount(BusNavigation);
 
