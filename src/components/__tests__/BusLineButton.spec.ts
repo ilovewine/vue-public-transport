@@ -3,11 +3,20 @@ import { mount } from '@vue/test-utils';
 import BusLineButton from '../BusLineButton.vue';
 
 describe('BusLineButton', () => {
-  it('should provide a list of router-links', () => {
-    const wrapper = mount(BusLineButton);
+  it('should display a button with a given number and `active` class when set to active', async () => {
+    const wrapper = mount(BusLineButton, {
+      props: {
+        number: 1,
+      },
+    });
 
-    console.log(wrapper);
+    expect(wrapper.text()).toBe('1');
+    expect(wrapper.classes()).not.toContain('active');
 
-    expect(1).toBe(1);
+    await wrapper.setProps({
+      active: true,
+    });
+
+    expect(wrapper.classes()).toContain('active');
   });
 });
