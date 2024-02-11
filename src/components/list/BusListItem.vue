@@ -1,5 +1,6 @@
 <template>
   <component
+    data-test="list-item"
     :class="{ active }"
     class="text-decoration-none"
     :is="interactive ? 'a' : 'span'"
