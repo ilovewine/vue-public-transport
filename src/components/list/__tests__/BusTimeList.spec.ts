@@ -1,13 +1,29 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusTimeList from '../BusTimeList.vue';
+import provideStore from '@/tests/helpers/provideStore';
+import state from '@/store/state';
+import { BusStopModel } from '@/types/BusStopModel';
+import { stops } from '@/tests/fixtures/testData';
+import getDataSelector from '@/tests/getDataSelector';
 
-describe.todo('BusTimeList', () => {
-  it('should provide a list of router-links', () => {
-    const wrapper = mount(BusTimeList);
+describe('BusTimeList', () => {
+  it('should display a non-interactive time list', () => {
+    const selectedStop: BusStopModel = stops().list[0];
+    const storeState = { ...state, selectedStop };
+    const { store, setup } = provideStore(storeState);
+    const wrapper = mount(BusTimeList, {
+      ...setup,
+    });
 
-    console.log(wrapper);
+    expect(wrapper.text()).toContain(`Bus Stop: ${selectedStop.stop}`);
 
-    expect(1).toBe(1);
+    const items = wrapper.findAll(getDataSelector('bus-list-item'));
+    expect(items).toHaveLength(3);
+
+    const item = items[0];
+    item.trigger('click');
+
+    expect(store.commit).not.toHaveBeenCalled();
   });
 });

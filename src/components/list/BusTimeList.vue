@@ -7,7 +7,7 @@
       </div>
     </template>
     <template #default="{ label }">
-      <bus-list-item :label="label" />
+      <bus-list-item :label="label" data-test="bus-list-item" />
     </template>
   </bus-data-list>
 </template>
