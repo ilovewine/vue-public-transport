@@ -5,6 +5,7 @@ import state from '@/store/state';
 import Sortable from '@/class/Sortable';
 import provideStore from '@/tests/config/provideStore';
 import getDataSelector from '@/tests/getDataSelector';
+import { BusStopModel } from '@/types/BusStopModel';
 
 const headerSlotContent = 'Header Slot Test';
 const defaultSlotContent = 'Default Slot Test';
@@ -77,5 +78,30 @@ describe.concurrent('BusDataList', () => {
     const placeholder = wrapper.find(getDataSelector('placeholder'));
 
     expect(placeholder.text()).toContain('Please select the bus stop first');
+  });
+
+  it('should emit the `select` event when an item is clicked', () => {
+    const sortableListItem: BusStopModel = {
+      stop: 'test',
+      order: 0,
+      timetable: new Sortable(),
+    };
+
+    const wrapper = mount(BusDataList, {
+      ...provideStore(state),
+      props: {
+        sortable: new Sortable([sortableListItem]),
+        isReady: true,
+      },
+    });
+
+    const item = wrapper.find(getDataSelector('list-group-item'));
+
+    item.trigger('click');
+
+    expect(wrapper.emitted('select')).toHaveLength(1);
+    expect(
+      (wrapper.emitted('select') as NonNullable<BusStopModel[]>)[0]
+    ).toStrictEqual([sortableListItem]);
   });
 });
