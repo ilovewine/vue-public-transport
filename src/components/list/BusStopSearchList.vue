@@ -3,11 +3,11 @@
     <template #header>
       <div class="d-flex gap-1 align-items-center my-3">
         <h3 class="m-0">Bus Stops</h3>
-        <sort-icon class="icon" @click="changeOrder" />
+        <sort-icon class="icon" @click="changeOrder" data-test="sort-icon" />
       </div>
     </template>
     <template #default="{ label }">
-      <bus-list-item :label="label" />
+      <bus-list-item :label="label" data-test="bus-list-item" />
     </template>
   </bus-data-list>
 </template>
