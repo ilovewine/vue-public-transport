@@ -5,7 +5,7 @@
   >
     <transition name="fade" mode="out-in">
       <div v-if="isReady">
-        <div ref="dataHeaders" class="px-3 header">
+        <div ref="dataHeaders" class="px-3 header" data-test="header">
           <slot name="header" />
         </div>
         <transition name="fade" mode="out-in">
@@ -15,6 +15,7 @@
           >
             <li
               v-for="item in list"
+              data-test="list-group-item"
               class="list-group-item py-3"
               :class="{ interactive }"
               @click="emit('select', item)"
@@ -109,4 +110,3 @@ const emptyPlaceholder = computed(
   }
 }
 </style>
-@/class/Sortable

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import withContext from './withContext';
 import actions, { ACTION, Context } from '..';
-import mockServerResponse from '../utils/__tests__/mock/serverResponse';
+import mockServerResponse from '@/tests/mocks/serverResponse';
 import retrieveStops from '../utils/retrieveStops';
 import retrieveLines from '../utils/retrieveLines';
 import { MUTATION } from '@/store/mutations';

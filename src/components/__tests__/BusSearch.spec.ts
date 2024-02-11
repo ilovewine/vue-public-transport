@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusSearch from '../BusSearch.vue';
+import getDataSelector from '@/tests/getDataSelector';
 
 describe('BusSearch', () => {
   it('should correctly pass input to v-model', async () => {
@@ -11,7 +12,7 @@ describe('BusSearch', () => {
           wrapper.setProps({ modelValue: e }),
       },
     });
-    const inputWrapper = await wrapper.get('.input');
+    const inputWrapper = await wrapper.get(getDataSelector('input'));
     const inputElement = inputWrapper.element as HTMLInputElement;
     expect(inputElement.value).toBe('');
 

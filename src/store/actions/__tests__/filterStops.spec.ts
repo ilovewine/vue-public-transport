@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import actions, { ACTION, Context } from '..';
 import Sortable from '@/class/Sortable';
 import { MUTATION } from '@/store/mutations';
-import withContext, { MockActionContext } from './withContext';
+import withContext from './withContext';
 
 describe('filterStops', () => {
   const filterStops = actions[ACTION.FILTER_STOPS];

@@ -1,6 +1,7 @@
 <template>
   <div class="input-group">
     <input
+      data-test="input"
       class="input"
       type="text"
       role="search"
