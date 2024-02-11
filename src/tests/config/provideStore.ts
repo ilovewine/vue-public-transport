@@ -1,12 +1,18 @@
-import { StoreState } from '@/store/state';
 import { key } from '@/store';
-import { Store } from 'vuex';
+import { StoreState } from '@/store/state';
+import { vi } from 'vitest';
 
-export default (store: Store<Partial<StoreState>>) => {
+export default (state: Partial<StoreState>) => {
+  const useStore = () => ({
+    state,
+    commit: vi.fn(),
+    dispatch: vi.fn(),
+  });
+
   return {
     global: {
       provide: {
-        [key as symbol]: store,
+        [key as symbol]: useStore(),
       },
     },
   };

@@ -28,7 +28,7 @@
       <div v-else>
         <stroked-border />
 
-        <div class="placeholder flex-grow-1">
+        <div data-test="placeholder" class="placeholder flex-grow-1">
           <span>{{ emptyPlaceholder }}</span>
         </div>
       </div>
@@ -75,7 +75,9 @@ const listHeight = computed(
 
 const emptyPlaceholder = computed(
   () =>
-    `Please select the bus ${store.state.selectedLine ? 'stop' : 'line'} first`
+    `Please select the bus ${
+      store.state.selectedLine.stops.list.length ? 'stop' : 'line'
+    } first`
 );
 </script>
 
