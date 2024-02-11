@@ -2,18 +2,23 @@ import { key } from '@/store';
 import { StoreState } from '@/store/state';
 import { vi } from 'vitest';
 
+const useStore = (state: Partial<StoreState>) => ({
+  state,
+  commit: vi.fn(),
+  dispatch: vi.fn(),
+});
+
 export default (state: Partial<StoreState>) => {
-  const useStore = () => ({
-    state,
-    commit: vi.fn(),
-    dispatch: vi.fn(),
-  });
+  const store = useStore(state);
 
   return {
-    global: {
-      provide: {
-        [key as symbol]: useStore(),
+    setup: {
+      global: {
+        provide: {
+          [key as symbol]: store,
+        },
       },
     },
+    store,
   };
 };

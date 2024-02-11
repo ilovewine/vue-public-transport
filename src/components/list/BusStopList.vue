@@ -4,13 +4,14 @@
       <h2 class="my-4">{{ data.title }}</h2>
       <div class="d-flex gap-1 align-items-center mb-3">
         <h3 class="m-0">Bus Stops</h3>
-        <sort-icon class="icon" @click="changeOrder" />
+        <sort-icon data-test="sort-icon" class="icon" @click="changeOrder" />
       </div>
     </template>
     <template #default="{ label: stopData }">
       <bus-list-item
         :label="stopData.stop"
         :active="active(stopData.stop)"
+        data-test="bus-list-item"
         interactive
       />
     </template>
