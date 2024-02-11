@@ -3,9 +3,10 @@ import { mount } from '@vue/test-utils';
 import BusDataList from '../BusDataList.vue';
 import state from '@/store/state';
 import Sortable from '@/class/Sortable';
-import provideStore from '@/tests/config/provideStore';
+import provideStore from '@/tests/helpers/provideStore';
 import getDataSelector from '@/tests/getDataSelector';
 import { BusStopModel } from '@/types/BusStopModel';
+import { stops } from '@/tests/fixtures/testData';
 
 const headerSlotContent = 'Header Slot Test';
 const defaultSlotContent = 'Default Slot Test';
@@ -13,7 +14,7 @@ const defaultSlotContent = 'Default Slot Test';
 describe.concurrent('BusDataList', () => {
   it('should pass slots to specific elements', () => {
     const wrapper = mount(BusDataList, {
-      ...provideStore(state),
+      ...provideStore(state).setup,
       props: {
         sortable: new Sortable([1, 2, 3]),
         isReady: true,
@@ -38,7 +39,7 @@ describe.concurrent('BusDataList', () => {
     const storeState = { ...state };
 
     const wrapper = mount(BusDataList, {
-      ...provideStore(storeState),
+      ...provideStore(storeState).setup,
       props: {
         sortable: null,
         isReady: false,
@@ -64,7 +65,7 @@ describe.concurrent('BusDataList', () => {
             { stop: 'test', order: 0, timetable: new Sortable() },
           ]),
         },
-      }),
+      }).setup,
       props: {
         sortable: null,
         isReady: false,
@@ -81,14 +82,10 @@ describe.concurrent('BusDataList', () => {
   });
 
   it('should emit the `select` event when an item is clicked', () => {
-    const sortableListItem: BusStopModel = {
-      stop: 'test',
-      order: 0,
-      timetable: new Sortable(),
-    };
+    const sortableListItem: BusStopModel = stops().list[0];
 
     const wrapper = mount(BusDataList, {
-      ...provideStore(state),
+      ...provideStore(state).setup,
       props: {
         sortable: new Sortable([sortableListItem]),
         isReady: true,

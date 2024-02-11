@@ -4,17 +4,11 @@ import Sortable from '@/class/Sortable';
 import storeState, { StoreState } from '@/store/state';
 import { BusStopModel } from '@/types/BusStopModel';
 import mutations, { MUTATION } from '..';
+import { stringStops, lines } from '@/tests/fixtures/testData';
 
-const lines: BusLineModel[] = [...Array(3).keys()].map((index) => ({
-  line: index,
-  stops: new Sortable(),
-}));
+const sortableLines = lines();
 
-const sortableLines = new Sortable(lines);
-
-const stops = [...Array(5).keys()].map((index) => `Stop ${index}`);
-
-const sortableStops = new Sortable(stops);
+const sortableStops = stringStops();
 
 const stop: BusStopModel = {
   stop: 'Stop 0',
@@ -45,8 +39,8 @@ describe('mutations', () => {
 
   it('setCurrentLine', () => {
     const setCurrentLine = mutations[MUTATION.SET_CURRENT_LINE];
-    setCurrentLine(state, lines[0]);
-    expect(state.selectedLine).toStrictEqual(lines[0]);
+    setCurrentLine(state, sortableLines.list[0]);
+    expect(state.selectedLine).toStrictEqual(sortableLines.list[0]);
     assertType<BusLineModel>(state.selectedLine);
   });
 

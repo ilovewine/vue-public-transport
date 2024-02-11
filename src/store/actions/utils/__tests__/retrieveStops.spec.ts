@@ -2,7 +2,7 @@ import { ServerResponseModel } from '@/types/response';
 import { assertType, describe, expect, it } from 'vitest';
 import retrieveStops from '../retrieveStops';
 import Sortable from '@/class/Sortable';
-import mockServerResponse from '@/tests/mocks/serverResponse';
+import mockServerResponse from '@/tests/fixtures/serverResponse';
 
 describe.concurrent('retrieveStops', () => {
   it('should return an empty Sortable when response is empty', () => {

@@ -1,13 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import withContext from './withContext';
+import withContext from '@/tests/helpers/actionWithContext';
 import actions, { ACTION, Context } from '..';
 import Sortable from '@/class/Sortable';
 import { MUTATION } from '@/store/mutations';
+import { stringStops } from '@/tests/fixtures/testData';
 
 describe('resetFilteredStops', () => {
   const resetFilteredStops = actions[ACTION.RESET_FILTERED_STOPS];
 
-  const stops = new Sortable(['stop1', 'stop3', 'stop2']);
+  const stops = stringStops();
 
   withContext((context) => {
     it('should call commit with SET_FILTERED_STOPS mutation and set sorted stops', () => {

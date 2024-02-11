@@ -1,22 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusStopList from '../BusStopList.vue';
-import provideStore from '@/tests/config/provideStore';
+import provideStore from '@/tests/helpers/provideStore';
 import state from '@/store/state';
 import { BusLineModel } from '@/types/BusLineModel';
 import Sortable from '@/class/Sortable';
 import getDataSelector from '@/tests/getDataSelector';
 import { MUTATION } from '@/store/mutations';
+import { stops } from '@/tests/fixtures/testData';
 
-let mockedTimetable = new Sortable(['10:00', '11:00', '12:00']);
-let mockedStops = new Sortable(
-  [...Array(5).keys()].map((index) => ({
-    stop: `stop ${index}`,
-    order: index,
-    timetable: mockedTimetable,
-  })),
-  (value) => value.order
-);
+let mockedStops = stops();
 let selectedLine: BusLineModel = {
   line: 1,
   stops: mockedStops,

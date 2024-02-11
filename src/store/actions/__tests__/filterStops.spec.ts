@@ -2,16 +2,15 @@ import { describe, it, expect } from 'vitest';
 import actions, { ACTION, Context } from '..';
 import Sortable from '@/class/Sortable';
 import { MUTATION } from '@/store/mutations';
-import withContext from './withContext';
+import withContext from '@/tests/helpers/actionWithContext';
+import { stringStops } from '@/tests/fixtures/testData';
 
 describe('filterStops', () => {
   const filterStops = actions[ACTION.FILTER_STOPS];
   const stops = new Sortable([
-    'stop 1',
+    ...stringStops().list,
     'filter stop 3',
-    'stop 2',
     'filter stop 2',
-    'stop 3',
     'filter stop 1',
   ]);
   const filteringCriteria = 'filter';

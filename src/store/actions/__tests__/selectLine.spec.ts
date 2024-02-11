@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import actions, { ACTION, Context } from '..';
-import withContext from './withContext';
+import withContext from '@/tests/helpers/actionWithContext';
 import { BusLineModel } from '@/types/BusLineModel';
 import Sortable from '@/class/Sortable';
 import { MUTATION } from '@/store/mutations';

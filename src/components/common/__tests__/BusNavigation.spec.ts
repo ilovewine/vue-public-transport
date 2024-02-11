@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusNavigation from '../BusNavigation.vue';
 import { RouteRecordRaw } from 'vue-router';
-import { provideStubs } from '@/tests/config/provideRouter';
+import { provideStubs } from '@/tests/helpers/provideRouter';
 import getDataSelector from '@/tests/getDataSelector';
 
 const mockRoutes: RouteRecordRaw[] = [
