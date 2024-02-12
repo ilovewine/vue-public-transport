@@ -1,18 +1,18 @@
 <template>
   <div class="d-flex flex-column h-100">
     <div class="mb-3">
-      <bus-line-picker />
+      <bus-line-picker data-test="bus-line-picker" />
     </div>
 
     <div class="flex-grow-1 position-relative">
-      <bus-line-preview class="preview" />
+      <bus-line-preview class="preview" data-test="bus-line-preview" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import BusLinePicker from '@/modules/bus-lines/BusLinePicker.vue';
-import BusLinePreview from '@/modules/bus-lines/BusLinePreview.vue';
+import BusLinePicker from '@/modules/BusLinePicker.vue';
+import BusLinePreview from '@/modules/BusLinePreview.vue';
 </script>
 
 <style lang="scss" scoped>
