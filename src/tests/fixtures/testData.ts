@@ -18,7 +18,7 @@ export const stringStops = () =>
 export const lines = () =>
   new Sortable<BusLineModel>(
     [...Array(3).keys()].map((index) => ({
-      line: index,
+      line: index + 1,
       stops: stops(),
     })),
     (value) => value.line

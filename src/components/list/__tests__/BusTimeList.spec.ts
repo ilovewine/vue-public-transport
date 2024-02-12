@@ -2,16 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusTimeList from '../BusTimeList.vue';
 import provideStore from '@/tests/helpers/provideStore';
-import state from '@/store/state';
 import { BusStopModel } from '@/types/BusStopModel';
 import { stops } from '@/tests/fixtures/testData';
 import getDataSelector from '@/tests/getDataSelector';
 
 describe('BusTimeList', () => {
-  it('should display a non-interactive time list', () => {
+  it('should display a non-interactive time list', async () => {
     const selectedStop: BusStopModel = stops().list[0];
-    const storeState = { ...state, selectedStop };
-    const { store, setup } = provideStore(storeState);
+    const { store, setup } = provideStore({ selectedStop });
     const wrapper = mount(BusTimeList, {
       ...setup,
     });
@@ -22,7 +20,7 @@ describe('BusTimeList', () => {
     expect(items).toHaveLength(3);
 
     const item = items[0];
-    item.trigger('click');
+    await item.trigger('click');
 
     expect(store.commit).not.toHaveBeenCalled();
   });

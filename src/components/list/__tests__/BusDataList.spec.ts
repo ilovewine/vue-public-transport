@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusDataList from '../BusDataList.vue';
-import state from '@/store/state';
 import Sortable from '@/class/Sortable';
 import provideStore from '@/tests/helpers/provideStore';
 import getDataSelector from '@/tests/getDataSelector';
@@ -14,7 +13,7 @@ const defaultSlotContent = 'Default Slot Test';
 describe.concurrent('BusDataList', () => {
   it('should pass slots to specific elements', () => {
     const wrapper = mount(BusDataList, {
-      ...provideStore(state).setup,
+      ...provideStore().setup,
       props: {
         sortable: new Sortable([1, 2, 3]),
         isReady: true,
@@ -36,10 +35,8 @@ describe.concurrent('BusDataList', () => {
   });
 
   it('should display a placeholder to select a bus line when no list is provided', () => {
-    const storeState = { ...state };
-
     const wrapper = mount(BusDataList, {
-      ...provideStore(storeState).setup,
+      ...provideStore().setup,
       props: {
         sortable: null,
         isReady: false,
@@ -58,7 +55,6 @@ describe.concurrent('BusDataList', () => {
   it('should display a placeholder to select a bus stop when no list is provided', () => {
     const wrapper = mount(BusDataList, {
       ...provideStore({
-        ...state,
         selectedLine: {
           line: 1,
           stops: new Sortable([
@@ -81,11 +77,11 @@ describe.concurrent('BusDataList', () => {
     expect(placeholder.text()).toContain('Please select the bus stop first');
   });
 
-  it('should emit the `select` event when an item is clicked', () => {
+  it('should emit the `select` event when an item is clicked', async () => {
     const sortableListItem: BusStopModel = stops().list[0];
 
     const wrapper = mount(BusDataList, {
-      ...provideStore(state).setup,
+      ...provideStore().setup,
       props: {
         sortable: new Sortable([sortableListItem]),
         isReady: true,
@@ -94,7 +90,7 @@ describe.concurrent('BusDataList', () => {
 
     const item = wrapper.find(getDataSelector('list-group-item'));
 
-    item.trigger('click');
+    await item.trigger('click');
 
     expect(wrapper.emitted('select')).toHaveLength(1);
     expect(

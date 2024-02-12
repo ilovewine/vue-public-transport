@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusStopSearchList from '../BusStopSearchList.vue';
 import provideStore from '@/tests/helpers/provideStore';
-import state from '@/store/state';
 import { stringStops } from '@/tests/fixtures/testData';
 import Sortable from '@/class/Sortable';
 import getDataSelector from '@/tests/getDataSelector';
@@ -14,9 +13,8 @@ describe.concurrent('BusStopSearchList', () => {
     const filteredStops = new Sortable(
       mockedStops.list.filter((stop) => stop.includes('stop 2'))
     );
-    const storeState = { ...state, stops: mockedStops, filteredStops };
     const wrapper = mount(BusStopSearchList, {
-      ...provideStore(storeState).setup,
+      ...provideStore({ stops: mockedStops, filteredStops }).setup,
     });
 
     const items = wrapper.findAll(getDataSelector('bus-list-item'));
@@ -24,29 +22,29 @@ describe.concurrent('BusStopSearchList', () => {
     expect(items[0].text()).toContain('stop 2');
   });
 
-  it('should not react to list item click events', () => {
+  it('should not react to list item click events', async () => {
     const filteredStops = new Sortable(
       mockedStops.list.filter((stop) => stop.includes('stop 2'))
     );
-    const storeState = { ...state, stops: mockedStops, filteredStops };
-    const { store, setup } = provideStore(storeState);
+    const { store, setup } = provideStore({
+      stops: mockedStops,
+      filteredStops,
+    });
     const wrapper = mount(BusStopSearchList, {
       ...setup,
     });
 
     const item = wrapper.find(getDataSelector('bus-list-item'));
-    item.trigger('click');
+    await item.trigger('click');
 
     expect(store.commit).not.toHaveBeenCalled();
   });
 
-  it('should sort items after clicking the sort icon', () => {
-    const storeState = {
-      ...state,
+  it('should sort items after clicking the sort icon', async () => {
+    const { setup } = provideStore({
       stops: mockedStops,
       filteredStops: mockedStops,
-    };
-    const { setup } = provideStore(storeState);
+    });
     let wrapper = mount(BusStopSearchList, {
       ...setup,
     });
@@ -57,7 +55,7 @@ describe.concurrent('BusStopSearchList', () => {
     });
 
     const sortIcon = wrapper.find(getDataSelector('sort-icon'));
-    sortIcon.trigger('click');
+    await sortIcon.trigger('click');
 
     wrapper = mount(BusStopSearchList, {
       ...setup,
@@ -67,8 +65,5 @@ describe.concurrent('BusStopSearchList', () => {
     list.forEach((item, index) => {
       expect(item.text()).toBe(`stop ${list.length - 1 - index}`);
     });
-
-    // since we're running tests concurrently, we need to change back the order to its initial state
-    sortIcon.trigger('click');
   });
 });

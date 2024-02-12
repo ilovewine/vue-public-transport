@@ -1,10 +1,8 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import BusStopList from '../BusStopList.vue';
 import provideStore from '@/tests/helpers/provideStore';
-import state from '@/store/state';
 import { BusLineModel } from '@/types/BusLineModel';
-import Sortable from '@/class/Sortable';
 import getDataSelector from '@/tests/getDataSelector';
 import { MUTATION } from '@/store/mutations';
 import { stops } from '@/tests/fixtures/testData';
@@ -18,7 +16,7 @@ let selectedLine: BusLineModel = {
 describe.concurrent('BusStopList', () => {
   it('should display a list of stops', () => {
     const wrapper = mount(BusStopList, {
-      ...provideStore({ ...state, selectedLine }).setup,
+      ...provideStore({ selectedLine }).setup,
     });
 
     const text = wrapper.text();
@@ -30,9 +28,9 @@ describe.concurrent('BusStopList', () => {
     });
   });
 
-  it('should change the sort order when `changeOrder` is called', () => {
+  it('should change the sort order when `changeOrder` is called', async () => {
     let wrapper = mount(BusStopList, {
-      ...provideStore({ ...state, selectedLine }).setup,
+      ...provideStore({ selectedLine }).setup,
     });
 
     let list = wrapper.findAll(getDataSelector('bus-list-item'));
@@ -43,33 +41,29 @@ describe.concurrent('BusStopList', () => {
 
     const sortIcon = wrapper.find(getDataSelector('sort-icon'));
 
-    sortIcon.trigger('click');
+    await sortIcon.trigger('click');
 
     wrapper = mount(BusStopList, {
-      ...provideStore({ ...state, selectedLine }).setup,
+      ...provideStore({ selectedLine }).setup,
     });
     list = wrapper.findAll(getDataSelector('bus-list-item'));
 
     list.forEach((item, index) => {
       expect(item.text()).toBe(`stop ${list.length - 1 - index}`);
     });
-
-    // since we're running tests concurrently, we need to change back the order to its initial state
-    sortIcon.trigger('click');
   });
 
-  it('should trigger the store mutation when `selectStop` is called', () => {
-    const { store, setup: storeSetup } = provideStore({
-      ...state,
+  it('should trigger the store mutation when `selectStop` is called', async () => {
+    const { store, setup } = provideStore({
       selectedLine,
     });
     const wrapper = mount(BusStopList, {
-      ...storeSetup,
+      ...setup,
     });
 
     const firstStop = wrapper.find(getDataSelector('bus-list-item'));
 
-    firstStop.trigger('click');
+    await firstStop.trigger('click');
 
     expect(store.commit).toHaveBeenCalledOnce();
     const mutationName = store.commit.mock.lastCall[0];

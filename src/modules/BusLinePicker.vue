@@ -10,6 +10,7 @@
         :number="line.line"
         :active="isLineSelected(line)"
         @click="setBusLine(line)"
+        data-test="bus-line-button"
       />
     </div>
   </div>

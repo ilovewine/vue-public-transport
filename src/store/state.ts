@@ -3,13 +3,13 @@ import { BusLineModel } from '@/types/BusLineModel';
 import { BusStopModel } from '@/types/BusStopModel';
 
 export const EMPTY_LINE: BusLineModel = {
-  line: 0,
+  line: NaN,
   stops: new Sortable(),
 };
 
 export const EMPTY_STOP: BusStopModel = {
   stop: '',
-  order: 0,
+  order: NaN,
   timetable: new Sortable(),
 };
 
