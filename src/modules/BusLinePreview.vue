@@ -1,11 +1,11 @@
 <template>
   <div class="row gap-3 pb-3">
     <div class="col px-0 position-relative">
-      <bus-stop-list />
+      <bus-stop-list data-test="bus-stop-list" />
     </div>
 
     <div class="col px-0 position-relative">
-      <bus-time-list />
+      <bus-time-list data-test="bus-time-list" />
     </div>
   </div>
 </template>
