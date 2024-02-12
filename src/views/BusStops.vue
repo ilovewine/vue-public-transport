@@ -5,14 +5,14 @@
         <div
           class="col-12 position-relative rounded-top px-2 pt-2 bg-white rounded-top"
         >
-          <bus-search v-model="searchValue" />
+          <bus-search v-model="searchValue" data-test="bus-search" />
         </div>
       </div>
     </div>
     <div class="position-relative flex-grow-1">
       <div class="list row pb-3">
         <div class="col-12 position-relative px-0">
-          <bus-stop-search-list />
+          <bus-stop-search-list data-test="bus-stop-search-list" />
         </div>
       </div>
     </div>
@@ -32,7 +32,9 @@ const store = useStore();
 const searchValue = shallowRef('');
 
 watch(searchValue, () => {
-  debounce(() => store.dispatch(ACTION.FILTER_STOPS, searchValue.value), 500);
+  debounce(() => {
+    store.dispatch(ACTION.FILTER_STOPS, searchValue.value);
+  }, 500);
 });
 
 onUnmounted(() => {
