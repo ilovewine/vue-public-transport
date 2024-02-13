@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white d-flex flex-column h-100 w-100 data-list position-absolute"
+    class="bg-white d-flex flex-column h-100 w-100 data-list position-absolute rounded"
     ref="component"
   >
     <transition name="fade" mode="out-in">
@@ -25,8 +25,8 @@
           </ul>
         </transition>
       </div>
-      <div v-else>
-        <stroked-border />
+      <div v-else class="d-flex h-100">
+        <stroked-border class="flex-grow-1 h-100" />
 
         <div data-test="placeholder" class="placeholder flex-grow-1">
           <span>{{ emptyPlaceholder }}</span>
@@ -87,7 +87,7 @@ const emptyPlaceholder = computed(
 }
 
 .header {
-  border-bottom: 2px solid $border-color;
+  border-bottom: 2px solid var(--bs-border-color);
 }
 .border-dashed {
   border: 2px dashed #9a9da4;
@@ -106,7 +106,7 @@ const emptyPlaceholder = computed(
   &.interactive {
     transition: all 0.2s ease-in-out;
     &:hover {
-      background-color: #f8f8fb;
+      // background-color: #f8f8fb;
       cursor: pointer;
     }
   }

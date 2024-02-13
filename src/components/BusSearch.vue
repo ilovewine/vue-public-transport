@@ -23,7 +23,7 @@ const model = defineModel<string>({ default: '' });
   position: relative;
   padding: 0.75rem 1rem;
   border: 1px solid #e2e4ea;
-  border-radius: $border-radius;
+  border-radius: var(--bs-border-radius);
   display: inline-flex;
   align-items: center;
   &:focus-within {

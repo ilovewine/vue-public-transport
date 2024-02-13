@@ -27,9 +27,9 @@ const active = (to: string) => computed(() => to === route.path);
 .nav-underline {
   .nav-link {
     &.active {
-      color: $nav-link-hover-color;
-      border-color: $nav-underline-link-active-color;
-      font-weight: $nav-link-font-weight;
+      color: var(--bs-nav-link-hover-color);
+      border-color: var(--bs-nav-underline-link-active-color);
+      font-weight: var(--bs-nav-link-font-weight);
     }
   }
 }

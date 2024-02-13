@@ -1,11 +1,19 @@
 <template>
-  <svg viewBox="0 0 102 102" preserveAspectRatio="none" class="svg">
+  <svg
+    width="100%"
+    height="100%"
+    xmlns="http://www.w3.org/2000/svg"
+    class="svg"
+  >
     <rect
       width="100%"
       height="100%"
-      stroke-dasharray="5, 5"
-      stroke-width="0.7"
       fill="none"
+      stroke-width="4"
+      stroke-dasharray="30,40"
+      stroke-dashoffset="0"
+      stroke-linecap="round"
+      class="rectangle"
     />
   </svg>
 </template>
@@ -13,16 +21,13 @@
 <script lang="ts" setup></script>
 
 <style lang="scss" scoped>
+$border-radius: var(--bs-border-radius);
 .svg {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  rect {
-    stroke: #9a9da4;
-    $radius: calc($border-radius / 3);
-    rx: $radius;
-    ry: $radius;
-  }
+  border-radius: $border-radius;
+}
+.rectangle {
+  stroke: #9a9da4;
+  rx: $border-radius;
+  ry: $border-radius;
 }
 </style>

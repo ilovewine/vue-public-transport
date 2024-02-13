@@ -4,9 +4,31 @@ $body-bg: #f3f4f9;
 $body-color: #353536;
 $font-family-base: 'Inter', sans-serif;
 $font-size-base: 1rem;
-$h1-font-size: $font-size-base * 2;
-$h2-font-size: $font-size-base * 1.25;
-$h3-font-size: $font-size-base;
+$spacers: (
+  0: 0,
+  1: 0.5rem,
+  // 8px
+  2: 0.75rem,
+  // 12px
+  3: 1rem,
+  // 16px
+  4: 1.25rem,
+  // 20px
+  5: 1.5rem,
+  // 24px
+  6: 2rem,
+  // 32px
+  7: 2.5rem,
+  // 40px
+);
+$blue: #1952e1;
+$border-color: #f3f4f9;
+$list-group-hover-bg: #f8f8fb;
+$list-group-active-color: $blue;
+$h1-font-size: $font-size-base * 1.5;
+$h2-font-size: $font-size-base * 0.875;
+$h3-font-size: $font-size-base * 0.75;
+$headings-font-weight: 600;
 $input-btn-font-size: $font-size-base * 0.9;
 $nav-link-padding-y: 1.5rem;
 $nav-link-color: #9a9ca4;
