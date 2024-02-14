@@ -103,7 +103,7 @@ const emptyPlaceholder = computed(
   &.interactive {
     transition: all 0.2s ease-in-out;
     &:hover {
-      background-color: #f8f8fb;
+      background-color: var(--bs-gray-100);
       cursor: pointer;
     }
   }

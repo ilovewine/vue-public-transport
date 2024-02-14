@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    class="btn btn-primary px-3 py-1 fs-3"
+    class="btn btn-primary px-3 py-1 fs-3 fw-medium"
     :class="{ active }"
   >
     {{ number }}

@@ -17,10 +17,10 @@ const emit = defineEmits<{
 
 <style lang="scss" scoped>
 .sort-button {
-  padding: 0.25rem;
+  padding: 0 0.25rem;
   cursor: pointer;
 }
 .icon {
-  color: #9a9da4;
+  color: var(--bs-gray-400);
 }
 </style>

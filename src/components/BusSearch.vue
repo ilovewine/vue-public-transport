@@ -22,11 +22,11 @@ const model = defineModel<string>({ default: '' });
 
 <style lang="scss" scoped>
 .input-group {
-  border: 1px solid #e2e4ea;
+  border: 1px solid var(--bs-gray-300);
   &:focus-within {
-    border-color: #1952e1;
+    border-color: var(--bs-primary);
     .icon {
-      color: #1952e1;
+      color: var(--bs-primary);
     }
   }
 }
@@ -35,10 +35,10 @@ const model = defineModel<string>({ default: '' });
     outline: none;
   }
   &::placeholder {
-    color: #9a9da4;
+    color: var(--bs-gray-400);
   }
 }
 .icon {
-  color: #9a9da4;
+  color: var(--bs-gray-400);
 }
 </style>
