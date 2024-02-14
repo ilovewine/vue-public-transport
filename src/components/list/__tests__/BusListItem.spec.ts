@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
-import BusListItem from '../BusListItem.vue';
+import BusListItem from '../elements/BusListItem.vue';
 import getDataSelector from '@/tests/getDataSelector';
 
 const label = 'test label';
