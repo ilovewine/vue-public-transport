@@ -1,9 +1,9 @@
 <template>
-  <div class="row py-4 bg-white rounded">
+  <div class="row py-5 bg-white rounded">
     <div class="col-12">
-      <h2 class="mb-4">Select Bus Line</h2>
+      <h2 class="mb-6">Select Bus Line</h2>
     </div>
-    <div class="col-12 d-flex flex-wrap bus-lines">
+    <div class="col-12 d-flex flex-wrap gap-1">
       <bus-line-button
         v-for="line in linesList"
         :key="line.line"
@@ -40,8 +40,4 @@ const setBusLine = (line: BusLineModel) => {
 };
 </script>
 
-<style lang="scss" scoped>
-.bus-lines {
-  gap: 0.5rem;
-}
-</style>
+<style lang="scss" scoped></style>

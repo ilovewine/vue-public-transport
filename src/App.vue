@@ -1,6 +1,6 @@
 <template>
-  <div class="app-content pt-7 container-fluid">
-    <header class="row mb-3">
+  <div class="app-content py-7 container-fluid">
+    <header class="row mx-0 mb-3">
       <div class="col-12">
         <h1 class="title mb-5">Timetable</h1>
       </div>
@@ -8,7 +8,7 @@
         <bus-navigation />
       </div>
     </header>
-    <main class="flex-grow-1 my-7 mx-6">
+    <main class="row mx-0 flex-grow-1">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -34,5 +34,6 @@ store.dispatch(ACTION.INITIALIZE_DATA);
   height: 100vh;
   display: flex;
   flex-direction: column;
+  --bs-gutter-x: 4rem;
 }
 </style>

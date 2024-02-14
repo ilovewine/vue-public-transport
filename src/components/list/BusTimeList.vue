@@ -1,8 +1,8 @@
 <template>
   <bus-data-list v-bind="data">
     <template #header>
-      <h2 class="my-4">{{ data.title }}</h2>
-      <div class="d-flex gap-1 align-items-center mb-3">
+      <h2 class="mb-6">{{ data.title }}</h2>
+      <div class="mb-5">
         <h3 class="m-0">Time</h3>
       </div>
     </template>

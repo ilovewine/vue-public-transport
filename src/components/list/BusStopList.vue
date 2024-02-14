@@ -1,10 +1,12 @@
 <template>
   <bus-data-list @select="selectStop" v-bind="data" interactive>
     <template #header>
-      <h2 class="my-4">{{ data.title }}</h2>
-      <div class="d-flex gap-1 align-items-center mb-3">
+      <h2 class="mb-6">{{ data.title }}</h2>
+      <div class="d-flex align-items-center mb-5">
         <h3 class="m-0">Bus Stops</h3>
-        <sort-icon data-test="sort-icon" class="icon" @click="changeOrder" />
+        <div class="sort-button d-inline-flex" @click="changeOrder">
+          <sort-icon data-test="sort-icon" class="icon" />
+        </div>
       </div>
     </template>
     <template #default="{ label: stopData }">
@@ -48,8 +50,11 @@ const changeOrder = () => store.state.selectedLine.stops.changeOrder();
 </script>
 
 <style lang="scss" scoped>
+.sort-button {
+  padding: 0.25rem;
+  cursor: pointer;
+}
 .icon {
   color: #9a9da4;
-  cursor: pointer;
 }
 </style>

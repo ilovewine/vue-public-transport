@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @import 'bootstrap/scss/functions';
 
 $body-bg: #f3f4f9;
@@ -37,7 +39,7 @@ $nav-underline-gap: 0;
 $nav-underline-border-width: 0.15rem;
 $nav-underline-link-active-color: #3f00e4;
 $nav-link-font-weight: 500;
-$grid-gutter-width: 3rem;
+$grid-gutter-width: 2 * map.get($spacers, 5);
 $btn-active-bg-shade-amount: 50%;
 
 @import 'bootstrap/scss/variables';

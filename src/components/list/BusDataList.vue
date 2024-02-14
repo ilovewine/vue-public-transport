@@ -1,22 +1,26 @@
 <template>
   <div
-    class="bg-white d-flex flex-column h-100 w-100 data-list position-absolute rounded"
+    class="bg-white d-flex flex-column h-100 w-100 position-absolute rounded"
     ref="component"
   >
     <transition name="fade" mode="out-in">
-      <div v-if="isReady">
-        <div ref="dataHeaders" class="px-3 header" data-test="header">
+      <div class="contents" v-if="isReady">
+        <div
+          ref="dataHeaders"
+          class="px-5 pt-5 border-bottom border-2"
+          data-test="header"
+        >
           <slot name="header" />
         </div>
         <transition name="fade" mode="out-in">
           <ul
-            class="list-group list-group-flush p-0 overflow-y-auto"
+            class="list-group list-group-flush p-0 overflow-y-auto flex-grow-1"
             :key="key"
           >
             <li
               v-for="item in list"
               data-test="list-group-item"
-              class="list-group-item py-3"
+              class="list-group-item py-4 px-5"
               :class="{ interactive }"
               @click="emit('select', item)"
             >
@@ -82,15 +86,8 @@ const emptyPlaceholder = computed(
 </script>
 
 <style lang="scss" scoped>
-.data-list {
-  position: relative;
-}
-
-.header {
-  border-bottom: 2px solid var(--bs-border-color);
-}
-.border-dashed {
-  border: 2px dashed #9a9da4;
+.contents {
+  display: contents;
 }
 .placeholder {
   position: absolute;
@@ -106,7 +103,7 @@ const emptyPlaceholder = computed(
   &.interactive {
     transition: all 0.2s ease-in-out;
     &:hover {
-      // background-color: #f8f8fb;
+      background-color: #f8f8fb;
       cursor: pointer;
     }
   }

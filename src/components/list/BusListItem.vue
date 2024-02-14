@@ -23,7 +23,7 @@ defineProps<BusListItemProps>();
 .text-decoration-none {
   color: unset;
   &.active {
-    // color: #1952e1;
+    color: #1952e1;
   }
 }
 </style>
