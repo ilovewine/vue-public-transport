@@ -1,8 +1,10 @@
 <template>
-  <div class="input-group">
+  <div
+    class="input-group position-relative d-inline-flex align-items-center rounded py-2 px-3"
+  >
     <input
       data-test="input"
-      class="input"
+      class="input fs-3 border-0"
       type="text"
       role="search"
       placeholder="Search..."
@@ -20,12 +22,7 @@ const model = defineModel<string>({ default: '' });
 
 <style lang="scss" scoped>
 .input-group {
-  position: relative;
-  padding: 0.75rem 1rem;
   border: 1px solid #e2e4ea;
-  border-radius: var(--bs-border-radius);
-  display: inline-flex;
-  align-items: center;
   &:focus-within {
     border-color: #1952e1;
     .icon {
@@ -34,7 +31,6 @@ const model = defineModel<string>({ default: '' });
   }
 }
 .input {
-  border: none;
   &:focus {
     outline: none;
   }

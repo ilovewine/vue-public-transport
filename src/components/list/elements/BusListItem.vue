@@ -2,7 +2,7 @@
   <component
     data-test="list-item"
     :class="{ active }"
-    class="text-decoration-none"
+    class="text-decoration-none fs-3"
     :is="interactive ? 'a' : 'span'"
   >
     {{ label }}

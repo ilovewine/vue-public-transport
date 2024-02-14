@@ -1,5 +1,9 @@
 <template>
-  <button type="button" class="btn btn-primary px-3 py-1" :class="{ active }">
+  <button
+    type="button"
+    class="btn btn-primary px-3 py-1 fs-3"
+    :class="{ active }"
+  >
     {{ number }}
   </button>
 </template>
