@@ -3,14 +3,14 @@
     <div class="position-relative">
       <div class="row">
         <div
-          class="col-12 position-relative rounded-top px-2 pt-2 bg-white rounded-top"
+          class="col-12 position-relative rounded-top p-1 bg-white rounded-top"
         >
           <bus-search v-model="searchValue" data-test="bus-search" />
         </div>
       </div>
     </div>
     <div class="position-relative flex-grow-1">
-      <div class="list row pb-3">
+      <div class="list row">
         <div class="col-12 position-relative px-0">
           <bus-stop-search-list data-test="bus-stop-search-list" />
         </div>

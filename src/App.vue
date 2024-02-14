@@ -1,7 +1,7 @@
 <template>
   <div class="app-content py-7 container-fluid">
     <header class="row mx-0 mb-3">
-      <div class="col-12">
+      <div class="col-12 px-0">
         <h1 class="title mb-5">Timetable</h1>
       </div>
       <div class="col-12 bg-white rounded">

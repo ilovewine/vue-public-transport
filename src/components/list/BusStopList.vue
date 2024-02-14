@@ -2,12 +2,7 @@
   <bus-data-list @select="selectStop" v-bind="data" interactive>
     <template #header>
       <h2 class="mb-6">{{ data.title }}</h2>
-      <div class="d-flex align-items-center mb-5">
-        <h3 class="m-0">Bus Stops</h3>
-        <div class="sort-button d-inline-flex" @click="changeOrder">
-          <sort-icon data-test="sort-icon" class="icon" />
-        </div>
-      </div>
+      <bus-stop-list-header @sort="changeOrder" />
     </template>
     <template #default="{ label: stopData }">
       <bus-list-item
@@ -22,8 +17,8 @@
 
 <script lang="ts" setup>
 import BusDataList from '@/components/list/BusDataList.vue';
-import BusListItem from '@/components/list/BusListItem.vue';
-import SortIcon from '@/assets/SortIcon.vue';
+import BusListItem from '@/components/list/elements/BusListItem.vue';
+import BusStopListHeader from '@/components/list/elements/BusStopListHeader.vue';
 import useStore from '@/store';
 import { MUTATION } from '@/store/mutations';
 import { computed, reactive } from 'vue';
@@ -48,13 +43,3 @@ const data = reactive({
 
 const changeOrder = () => store.state.selectedLine.stops.changeOrder();
 </script>
-
-<style lang="scss" scoped>
-.sort-button {
-  padding: 0.25rem;
-  cursor: pointer;
-}
-.icon {
-  color: #9a9da4;
-}
-</style>

@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import BusDataList from '@/components/list/BusDataList.vue';
-import BusListItem from '@/components/list/BusListItem.vue';
+import BusListItem from '@/components/list/elements/BusListItem.vue';
 import { computed, reactive } from 'vue';
 import useStore from '@/store';
 
