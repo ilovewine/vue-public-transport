@@ -12,7 +12,7 @@ To run this project, you need to have Node.js and npm installed.
 
 ### Scripts
 
-- `npm run serve`: runs the application in development mode with hot-reloading
+- `npm run start`: runs the application in development mode with hot-reloading
 - `npm run build`: builds the application for production
 - `npm run lint`: runs eslint on the codebase
 - `npm run test`: runs the unit tests

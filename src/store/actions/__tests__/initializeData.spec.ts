@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import withContext from '@/tests/helpers/actionWithContext';
 import actions, { ACTION, Context } from '..';
 import mockServerResponse from '@/tests/fixtures/serverResponse';
@@ -12,18 +12,13 @@ const getLineList = (lines: Sortable<BusLineModel>) =>
   lines.list.map((line) => line.line);
 
 describe('initializeData', () => {
+
   const initializeData = actions[ACTION.INITIALIZE_DATA];
 
   const stops = retrieveStops(mockServerResponse);
   const lines = retrieveLines(mockServerResponse);
 
-  vi.mock('axios', () => ({
-    default: {
-      get: () => ({
-        data: mockServerResponse,
-      }),
-    },
-  }));
+  vi.doMock('/data.json', () => ({stops: mockServerResponse}))
 
   vi.doMock('../utils/retrieveLines.ts', () => ({
     default: () => lines,

@@ -3,10 +3,11 @@ import { ACTION, Context } from '.';
 import { MUTATION } from '../mutations';
 import retrieveStops from './utils/retrieveStops';
 import retrieveLines from './utils/retrieveLines';
-import { stops } from '/data.json';
 
 export default async (context: Context) => {
-  const response = stops as ServerResponseModel;
+  // @ts-ignore
+  const response = (await import('/data.json')).stops as ServerResponseModel;
+  console.log(response)
   context.commit(MUTATION.SET_BUS_STOPS, retrieveStops(response));
   context.commit(MUTATION.SET_BUS_LINES, retrieveLines(response));
 
